@@ -23,7 +23,10 @@ void field::setRoom()
 	enabled = true;
 	type = ROOM;
 }
-
+void field::setVisible()
+{
+	visible = true;
+}
 bool field::getEnabled()
 {
 	return enabled;

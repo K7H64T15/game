@@ -140,14 +140,69 @@ bool map::createTunnel(int length, int direction)
 	return true;
 }
 
-void map::setVisibleArea()
+bool map::movePlayer(int direction)
 {
-
+	switch (direction)
+	{
+	case 0:
+		if (fields[playerY-1][playerX].getEnabled == true) //UP
+		{
+			playerY--;
+			setPlayerPosition(playerX, playerY);
+			setVisibleArea();
+			return true;
+		}
+		break;
+	case 1:
+		if (fields[playerY][playerX+1].getEnabled == true) //RIGHT
+		{
+			playerX++;
+			setPlayerPosition(playerX, playerY);
+			setVisibleArea();
+			return true;
+		}
+		break;
+	case 2:
+		if (fields[playerY+1][playerX].getEnabled == true) //DOWN
+		{
+			playerY++;
+			setPlayerPosition(playerX, playerY);
+			setVisibleArea();
+			return true;
+		}
+		break;
+	case 3:
+		if (fields[playerY][playerX-1].getEnabled == true) //LEFT
+		{
+			playerX--;
+			setPlayerPosition(playerX, playerY);
+			setVisibleArea();
+			return true;
+		}
+		break;
+	}
+	return false;
 }
 
-void map::setPlayerPosition()
+void map::setVisibleArea()
 {
+	fields[playerY - 1][playerX - 1].setVisible();
+	fields[playerY - 1][playerX].setVisible();
+	fields[playerY - 1][playerX + 1].setVisible();
 
+	fields[playerY][playerX - 1].setVisible();
+	fields[playerY][playerX].setVisible();
+	fields[playerY][playerX + 1].setVisible();
+
+	fields[playerY + 1][playerX - 1].setVisible();
+	fields[playerY + 1][playerX].setVisible();
+	fields[playerY + 1][playerX + 1].setVisible();
+}
+
+void map::setPlayerPosition(int x, int y)
+{
+	playerX = x;
+	playerY = y;
 }
 
 void map::draw() //for console test

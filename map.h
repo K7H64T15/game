@@ -28,8 +28,9 @@ public:
 	void generateMap();
 	bool createTunnel(int length, int direction);
 	
+	bool movePlayer(int direction);
 	void setVisibleArea();
-	void setPlayerPosition();
+	void setPlayerPosition(int x, int y);
 
 	void draw(); //temp
 

@@ -20,9 +20,11 @@ public:
 
 	void setTunnel(int orientation);
 	void setRoom();
+	void setVisible();
 
 	bool getEnabled();
 	bool getVisible();
+
 	int getType();
 };
 
