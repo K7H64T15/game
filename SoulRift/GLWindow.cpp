@@ -16,7 +16,7 @@ GLWindow::GLWindow()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGTH, "Soul Rift", glfwGetPrimaryMonitor(), NULL);
+	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGTH, "Soul Rift", /*glfwGetPrimaryMonitor()*/NULL, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
@@ -33,7 +33,7 @@ GLWindow::GLWindow()
 
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	glfwSetCursorPosCallback(window, onMouseMove);
+	//glfwSetCursorPosCallback(window, onMouseMove);
 
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 

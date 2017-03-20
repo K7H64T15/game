@@ -9,7 +9,7 @@ protected:
 public:
 	GLWindow();
 	void loop();
-	friend static void onMouseMove(GLFWwindow* window, double xpos, double ypos);
+	//friend static void onMouseMove(GLFWwindow* window, double xpos, double ypos);
 	~GLWindow();
 };
 
