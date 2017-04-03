@@ -1,0 +1,6 @@
+#pragma once
+
+const int CREATURE_HEALTH_CON_FACTOR = 10;
+const int CREATURE_STAMINA_CON_FACTOR = 10;
+const int CREATURE_STAMINA_STR_FACTOR = 5;
+const int CREATURE_MANA_INT_FACTOR = 10;

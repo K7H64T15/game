@@ -93,7 +93,7 @@ bool map::createTunnel(int length, int direction)
 	switch (direction)
 	{
 		case 0: 
-			if (currentY - length < 0) //UP
+			if (currentY - length < 1) //UP
 			{
 				return false;
 			}
@@ -101,7 +101,7 @@ bool map::createTunnel(int length, int direction)
 			orientation = 1; //vertical
 			break;
 		case 1: 
-			if (currentX + length >= mapX) //RIGHT
+			if (currentX + length >= mapX - 1) //RIGHT
 			{
 				return false;
 			}
@@ -109,7 +109,7 @@ bool map::createTunnel(int length, int direction)
 			orientation = 0; //horizontal
 			break;
 		case 2: 
-			if (currentY + length >= mapY) //DOWN
+			if (currentY + length >= mapY - 1) //DOWN
 			{
 				return false;
 			}
@@ -117,7 +117,7 @@ bool map::createTunnel(int length, int direction)
 			orientation = 1; //vertical
 			break;
 		case 3: 
-			if (currentX - length < 0) //LEFT
+			if (currentX - length < 1) //LEFT
 			{
 				return false;
 			}
@@ -144,8 +144,8 @@ bool map::movePlayer(int direction)
 {
 	switch (direction)
 	{
-	case 0:
-		if (fields[playerY-1][playerX].getEnabled == true) //UP
+	case UP:
+		if (fields[playerY-1][playerX].getEnabled() == true) //UP
 		{
 			playerY--;
 			setPlayerPosition(playerX, playerY);
@@ -153,8 +153,8 @@ bool map::movePlayer(int direction)
 			return true;
 		}
 		break;
-	case 1:
-		if (fields[playerY][playerX+1].getEnabled == true) //RIGHT
+	case RIGHT:
+		if (fields[playerY][playerX+1].getEnabled() == true) //RIGHT
 		{
 			playerX++;
 			setPlayerPosition(playerX, playerY);
@@ -162,8 +162,8 @@ bool map::movePlayer(int direction)
 			return true;
 		}
 		break;
-	case 2:
-		if (fields[playerY+1][playerX].getEnabled == true) //DOWN
+	case DOWN:
+		if (fields[playerY+1][playerX].getEnabled() == true) //DOWN
 		{
 			playerY++;
 			setPlayerPosition(playerX, playerY);
@@ -171,8 +171,8 @@ bool map::movePlayer(int direction)
 			return true;
 		}
 		break;
-	case 3:
-		if (fields[playerY][playerX-1].getEnabled == true) //LEFT
+	case LEFT:
+		if (fields[playerY][playerX-1].getEnabled() == true) //LEFT
 		{
 			playerX--;
 			setPlayerPosition(playerX, playerY);
@@ -207,10 +207,11 @@ void map::setPlayerPosition(int x, int y)
 
 void map::draw() //for console test
 {
+	system("cls");
 	for (int i = 0; i < mapY; i++)
 	{
 		for (int j = 0; j < mapX; j++)
-		{
+		{			
 			if (fields[i][j].getEnabled() == false)
 			{
 				cout << "#";
@@ -219,13 +220,24 @@ void map::draw() //for console test
 			{
 				if (fields[i][j].getType() == TUNNEL)
 				{
-					cout << " ";
+					if ((i == playerY) && (j == playerX))
+					{
+						cout << "P";
+					}
+					else
+						cout << " ";
 				}
 				else
 				{
-					cout << "@";
+					if ((i == playerY) && (j == playerX))
+					{
+						cout << "P";
+					}
+					else
+						cout << "@";
 				}
 			}
+			
 		}
 		cout << "\n";
 	}

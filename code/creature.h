@@ -1,7 +1,17 @@
 #pragma once
+#include <string>
+using namespace std;
+
+#include "stats.h"
+#include "perks.h"
+#include "skills.h"
+#include "creature_defines.h"
+
 class creature
 {
 private:
+
+	string name;
 
 	int healthPointsMax;
 	int healthPointsCurrent;
@@ -10,29 +20,25 @@ private:
     int staminaPointsMax;
     int staminaPointsCurrent;
 
-    int strength;
-    int agility;
-    int constitution;
-    int perception;
-    int intelligence;
-    int charisma;
+	stats stat;
+	perks perk;
+	skills skill;
 
 public:
 
+	creature();
+	~creature();
+
+	void setName(string value);
 	void setHealthPointsMax(int value);
 	void setHealthPointsCurrent(int value);
     void setManaPointsMax(int value);
     void setManaPointsCurrent(int value);
     void setStaminaPointsMax(int value);
     void setStaminaPointsCurrent(int value);
+	void setStat(int statN, int value);
 
-    void setStrength(int value);
-    void setAgility(int value);
-    void setConstitution(int value);
-    void setPerception(int value);
-    void setIntelligence(int value);
-    void setCharisma(int value);
-
+	string getName();
 	int getHealthPointsMax();
 	int getHealthPointsCurrent(); 
 	int getManaPointsMax();
@@ -40,10 +46,11 @@ public:
     int getStaminaPointsMax();
     int getStaminaPointsCurrent();
 
-    int getStrength();
-    int getAgility();
-    int getConstitution();
-    int getPerception();
-    int getIntelligence();
-    int getCharisma();
+	int getStat(int statN);
+
+	bool getPerk(int perkN);
+	bool* getPrekList();
+
+	int* getSkill(int skillN);
+	int** getSkillList();
 };
