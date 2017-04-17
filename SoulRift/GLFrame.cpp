@@ -3,8 +3,8 @@
 void GLFrame::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, size, points, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(arrayNum);
-	glVertexAttribPointer(arrayNum, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray((GLuint) arrayNum);
+	glVertexAttribPointer((GLuint) arrayNum, 2, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
 GLFrame::GLFrame()
@@ -30,7 +30,7 @@ GLFrame::GLFrame()
 	}
 	shaders = LoadShaders("FrameVertexShader.vertexshader", "FrameFragmentShader.fragmentshader");
 	texture = loadBMP_custom("background.bmp");
-	GLuint TextureID = glGetUniformLocation(shaders, "myTextureSampler");
+	GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 	glGenBuffers(1, &vbo);
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -42,7 +42,7 @@ GLFrame::GLFrame()
 	glBindVertexArray(1);
 }
 
-void GLFrame::addChid(GLObject * child)
+void GLFrame::addChild(GLObject *child)
 {
 	children.push_back(child);
 }
@@ -59,17 +59,6 @@ void GLFrame::draw()
 		(*iterator)->draw();
 }
 
-void GLFrame::onMouseMove(double xpos, double ypos)
-{
-	for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end(); iterator != end; ++iterator)
-	{
-		if ((*iterator)->isMouseOnObject(xpos, ypos))
-			(*iterator)->active();
-		else
-			(*iterator)->disactive();
-	}
-}
-
 GLFrame::~GLFrame()
 {
 	glDeleteBuffers(1, &vbo);
@@ -81,4 +70,13 @@ GLFrame::~GLFrame()
 		delete children.back();
 		children.pop_back();
 	}
+}
+
+std::list<Coordinates *> * GLFrame::getCoordinates() {
+	std::list<Coordinates* > *result = new std::list<Coordinates* >();
+    for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end();
+         iterator != end; ++iterator) {
+        result->push_back((*iterator)->getCoordinates());
+    }
+    return result;
 }

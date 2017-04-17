@@ -3,11 +3,11 @@
 void GLObject::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, size, points, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(arrayNum);
-	glVertexAttribPointer(arrayNum, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray((GLuint) arrayNum);
+	glVertexAttribPointer((GLuint) arrayNum, 2, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
-GLObject::GLObject(int x, int y, int heigth, int width) : x(x), y(y), width(width), heigth(heigth)
+GLObject::GLObject(int x, int y, int heigth, int width) : x(x), y(y), width(width), height(heigth)
 {
 	GLfloat g_vertex_buffer_data[] = {
 		(2 - (((float)x + width) / SCREEN_WIDTH) * 2) - 1, ((float)y / SCREEN_HEIGTH) * 2 - 1, // bottom-right
@@ -50,7 +50,7 @@ void GLObject::draw()
 
 bool GLObject::isMouseOnObject(double xpos, double ypos)
 {
-	return (xpos >= x && xpos <= (x + heigth) && ypos >= y && ypos <= (y + width));
+	return (xpos >= x && xpos <= (x + height) && ypos >= y && ypos <= (y + width));
 }
 
 void GLObject::active()
@@ -65,4 +65,8 @@ GLObject::~GLObject()
 {
 	glDeleteBuffers(1, &vbo);
 	glDeleteVertexArrays(1, &vao);
+}
+
+Coordinates * GLObject::getCoordinates() {
+    return new Coordinates(x, x + width, y, y + height);
 }

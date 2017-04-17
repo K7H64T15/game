@@ -9,13 +9,22 @@
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGTH 1080
 
+struct Coordinates {
+	int leftX;
+	int rightX;
+	int bottomY;
+	int topY;
+	Coordinates(int leftX, int rightX, int bottomY, int topY) : leftX(leftX), rightX(rightX), bottomY(bottomY),
+																topY(topY) {};
+};
+
 class GLObject
 {
 	GLuint vao, vbo, vboT;
 	GLfloat* coordinates, *uvcoordinates;
 	void InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum);
 protected:
-	int x, y, heigth, width;
+	int x, y, height, width;
 	GLuint shaders;
 	GLuint texture;
 public:
@@ -25,5 +34,6 @@ public:
 	bool isMouseOnObject(double xpos, double ypos);
 	virtual void active() = 0;
 	virtual void disactive() = 0;
+	Coordinates * getCoordinates();
 	virtual ~GLObject();
 };

@@ -1,6 +1,6 @@
 #include "GLWindow.h"
 
-
+std::list<Coordinates *> * GLWindow::click_positions = new std::list<Coordinates *>();
 
 GLWindow::GLWindow()
 {
@@ -24,7 +24,7 @@ GLWindow::GLWindow()
 	}
 	glfwMakeContextCurrent(window);
 
-	glewExperimental = true;
+	glewExperimental = (GLboolean) true;
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		getchar();
@@ -63,3 +63,14 @@ GLWindow::~GLWindow()
 	glfwTerminate();
 	//delete frame;
 }
+
+void GLWindow::loadCoordinates() {
+	//TODO:: cleanup
+    click_positions->clear();
+    std::list<Coordinates *> *coordinates = frame->getCoordinates();
+    for (std::list<Coordinates *>::const_iterator iterator = coordinates->begin(), end = coordinates->end();
+         iterator != end; ++iterator) {
+        click_positions->push_back(*iterator);
+    }
+}
+
