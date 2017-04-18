@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GLObject.h"
 
 void onStandartMouseClick(GLObject* object, int button, int action, int mods, double xpos, double ypos);
@@ -71,14 +72,20 @@ GLObject::~GLObject()
 }
 
 Coordinates * GLObject::getCoordinates() {
-    return new Coordinates(x, x + width, y, y + height);
+    return new Coordinates(x, (x + width), SCREEN_HEIGTH -  (y + height), SCREEN_HEIGTH - y);
 }
 
 void GLObject::setOnMouseClick(mouseClick onMouseClick) {
     this->onMouseClick = onMouseClick;
 }
 
+std::string GLObject::print() {
+    return "object";
+}
+
 void onStandartMouseClick(GLObject* object, int button, int action, int mods, double xpos, double ypos)
 {
-
+    std::cout << object->getCoordinates()->leftX << " " << object->getCoordinates()->rightX << " "
+              << object->getCoordinates()->bottomY << " " << object->getCoordinates()->topY << std::endl;
+    std::cout << object->print() << std::endl;
 }

@@ -8,6 +8,7 @@ GLButton::GLButton(int x, int y, int heigth, int width, std::string standardText
 	this->activeTexture = loadBMP_custom(standardTexture.c_str());
 	GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 	texture = this->standartTexture;
+    textureString = standardTexture;
 }
 
 void GLButton::active()
@@ -26,4 +27,8 @@ GLButton::~GLButton()
 {
 	glDeleteProgram(shaders);
 	glDeleteTextures(1, &texture);
+}
+
+std::string GLButton::print() {
+    return textureString;
 }

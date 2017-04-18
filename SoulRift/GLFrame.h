@@ -15,9 +15,8 @@ public:
 	void addChild(GLObject *child);
 	void draw();
 	std::list<Coordinates *> * getCoordinates();
-
+    std::list<GLObject*> getChildren();
     ~GLFrame();
-
 	std::list<mouseClick> *getOnMouseClickHandlers();
 };
 

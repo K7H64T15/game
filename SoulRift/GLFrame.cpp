@@ -89,3 +89,7 @@ std::list<mouseClick> * GLFrame::getOnMouseClickHandlers() {
     }
     return result;
 }
+
+std::list<GLObject *> GLFrame::getChildren() {
+    return children;
+}

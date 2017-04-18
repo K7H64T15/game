@@ -4,23 +4,20 @@
 #include <map>
 #include <string>
 
-struct MouseHandler {
-    Coordinates *coordinates;
-    mouseClick onMouseClick;
-};
-
 class GLWindow
 {
-	GLFWwindow* window;
+	static bool shouldClose;
 protected:
 	GLFrame* frame;
-    std::map<const std::string, GLFrame*> frames;
+    GLFWwindow* window;
 public:
 	GLWindow();
 	void loop();
 	//friend static void onMouseMove(GLFWwindow* window, double xpos, double ypos);
     void loadCoordinates();  //TODO: cleanup before use
-    static std::list<MouseHandler> *mouseHandlers; //TODO: move to protected block and declarate friend function
+    static std::map<const std::string, GLFrame*> *frames;
+    static std::string current;
+    static void closeWindow();
 	void setFrame(const std::string frame);
 	~GLWindow();
 };

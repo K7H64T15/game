@@ -2,7 +2,9 @@
 #include "GLWindow.h"
 #include "Constants.h"
 
-std::list<MouseHandler> * GLWindow::mouseHandlers = new std::list<MouseHandler>();
+std::string GLWindow::current = MENU_FRAME;
+std::map<const std::string, GLFrame*> *GLWindow::frames = new std::map<const std::string, GLFrame*>();
+bool GLWindow::shouldClose = false;
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos);
 void onMouseClick(GLFWwindow* window, int button, int action, int mods);
 
@@ -20,7 +22,7 @@ GLWindow::GLWindow()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGTH, "Soul Rift", /*glfwGetPrimaryMonitor()*/NULL, NULL);
+	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGTH, "Soul Rift", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
@@ -44,11 +46,11 @@ GLWindow::GLWindow()
 
     GLFrame *menuFrame = new GLFrame();
 	GLWindow::frame = menuFrame;
-    frames[MENU_FRAME] = menuFrame;
+    (*GLWindow::frames)[MENU_FRAME] = menuFrame;
 	GLFrame *gameFrame = new GLFrame();
 	GLFrame *settingsFrame = new GLFrame();
-	frames[GAME_FRAME] = gameFrame;
-	frames[SETTINGS_FRAME] = settingsFrame;
+    (*GLWindow::frames)[GAME_FRAME] = gameFrame;
+    (*GLWindow::frames)[SETTINGS_FRAME] = settingsFrame;
 }
 
 void GLWindow::loop()
@@ -61,24 +63,32 @@ void GLWindow::loop()
 
 	} // Check if the ESC key was pressed or the window was closed
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-		glfwWindowShouldClose(window) == 0);
+		glfwWindowShouldClose(window) == 0 && !shouldClose);
 }
 
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos)
 {
 
-    for (std::list<MouseHandler>::const_iterator iterator = GLWindow::mouseHandlers->begin(),
-                 end = GLWindow::mouseHandlers->end(); iterator != end; ++iterator) {
-        //std::cout << (*iterator).coordinates->bottomY << std::endl;
-    }
+//    for (std::list<MouseHandler>::const_iterator iterator = GLWindow::mouseHandlers->begin(),
+//                 end = GLWindow::mouseHandlers->end(); iterator != end; ++iterator) {
+//        //std::cout << (*iterator).coordinates->bottomY << std::endl;
+//    }
 }
 
 void onMouseClick(GLFWwindow* window, int button, int action, int mods)
 {
-    for (std::list<MouseHandler>::const_iterator iterator = GLWindow::mouseHandlers->begin(),
-                 end = GLWindow::mouseHandlers->end(); iterator != end; ++iterator) {
-        GLObject *object;
-        (*iterator).onMouseClick(object, button, action, mods, 0, 0);
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+    std::cout << xpos << " " << ypos << std::endl;
+    std::list<GLObject *> objects = (*GLWindow::frames)[GLWindow::current]->getChildren();
+    for (std::list<GLObject *>::const_iterator iterator = objects.begin(),
+                 end = objects.end(); iterator != end; ++iterator) {
+        if ((*iterator)->getCoordinates()->leftX <= xpos && (*iterator)->getCoordinates()->rightX >= xpos &&
+                (*iterator)->getCoordinates()->bottomY <= ypos && (*iterator)->getCoordinates()->topY >= ypos) {
+            ((*iterator)->getOnMouseClick())((*iterator), button, action, mods,
+                                             xpos - (*iterator)->getCoordinates()->leftX,
+                                             ypos - (*iterator)->getCoordinates()->bottomY);
+        }
     }
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
         std::cout << "clicked" << std::endl;
@@ -92,21 +102,28 @@ GLWindow::~GLWindow()
 
 void GLWindow::loadCoordinates() {
 	//TODO:: cleanup
-    mouseHandlers->clear();
-    std::list<Coordinates *> *coordinates = frame->getCoordinates();
-    std::list<mouseClick> *onMouseClick = frame->getOnMouseClickHandlers();
-    std::list<mouseClick>::const_iterator iterator2 = onMouseClick->begin(), end2 = onMouseClick->end();
-    for (std::list<Coordinates *>::const_iterator iterator = coordinates->begin(), end = coordinates->end();
-         iterator != end, iterator2 != end2; ++iterator, ++iterator2) {
-        MouseHandler *handler = new MouseHandler();
-        handler->coordinates = (*iterator);
-        handler->onMouseClick = (*iterator2);
-        mouseHandlers->push_back(*handler);
-    }
+//    mouseHandlers->clear();
+//    std::list<Coordinates *> *coordinates = frame->getCoordinates();
+//    std::list<mouseClick> *onMouseClick = frame->getOnMouseClickHandlers();
+//    std::list<mouseClick>::const_iterator iterator2 = onMouseClick->begin(), end2 = onMouseClick->end();
+//    for (std::list<Coordinates *>::const_iterator iterator = coordinates->begin(), end = coordinates->end();
+//         iterator != end, iterator2 != end2; ++iterator, ++iterator2) {
+//        MouseHandler *handler = new MouseHandler();
+//        handler->coordinates = (*iterator);
+//        handler->onMouseClick = (*iterator2);
+//        mouseHandlers->push_back(*handler);
+//    }
 }
 
 void GLWindow::setFrame(const std::string frame) {
-	this->frame = frames[frame];
+	this->frame = (*frames)[frame];
+    current = frame;
 	loadCoordinates();
 }
+
+void GLWindow::closeWindow() {
+    shouldClose = true;
+}
+
+
 

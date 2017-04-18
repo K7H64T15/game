@@ -42,5 +42,6 @@ public:
     void setOnMouseClick(mouseClick onMouseClick);
     mouseClick getOnMouseClick() { return onMouseClick; }
 	Coordinates * getCoordinates();
+    virtual std::string print(); //TODO: test method. remove
 	virtual ~GLObject();
 };
