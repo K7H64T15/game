@@ -70,3 +70,7 @@ GLObject::~GLObject()
 Coordinates * GLObject::getCoordinates() {
     return new Coordinates(x, x + width, y, y + height);
 }
+
+void GLObject::setOnMouseClick(mouseClick *onMouseClick) {
+    this->onMouseClick = onMouseClick;
+}

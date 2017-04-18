@@ -1,6 +1,10 @@
+#include <iostream>
 #include "GLWindow.h"
+#include "Constants.h"
 
 std::list<Coordinates *> * GLWindow::click_positions = new std::list<Coordinates *>();
+static void onMouseMove(GLFWwindow * window, double xpos, double ypos);
+void onMouseClick(GLFWwindow* window, int button, int action, int mods);
 
 GLWindow::GLWindow()
 {
@@ -33,11 +37,17 @@ GLWindow::GLWindow()
 
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	//glfwSetCursorPosCallback(window, onMouseMove);
+	glfwSetCursorPosCallback(window, onMouseMove);
 
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
-	GLWindow::frame = new GLFrame();
+    GLFrame *menuFrame = new GLFrame();
+	GLWindow::frame = menuFrame;
+    frames[MENU_FRAME] = menuFrame;
+	GLFrame *gameFrame = new GLFrame();
+	GLFrame *settingsFrame = new GLFrame();
+	frames[GAME_FRAME] = gameFrame;
+	frames[SETTINGS_FRAME] = settingsFrame;
 }
 
 void GLWindow::loop()
@@ -53,9 +63,19 @@ void GLWindow::loop()
 		glfwWindowShouldClose(window) == 0);
 }
 
-void onMouseMove(GLFWwindow * window, double xpos, double ypos)
+static void onMouseMove(GLFWwindow * window, double xpos, double ypos)
 {
-	//GLWindow::frame->draw();
+
+    for (std::list<Coordinates *>::const_iterator iterator = GLWindow::click_positions->begin(),
+                 end = GLWindow::click_positions->end(); iterator != end; ++iterator) {
+        std::cout << (*iterator)->bottomY << std::endl;
+    }
+}
+
+void onMouseClick(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+        std::cout << "clicked" << std::endl;
 }
 
 GLWindow::~GLWindow()
@@ -72,5 +92,10 @@ void GLWindow::loadCoordinates() {
          iterator != end; ++iterator) {
         click_positions->push_back(*iterator);
     }
+}
+
+void GLWindow::setFrame(const std::string frame) {
+	this->frame = frames[frame];
+	loadCoordinates();
 }
 

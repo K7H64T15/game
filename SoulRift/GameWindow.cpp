@@ -1,5 +1,10 @@
 #include "GameWindow.h"
 
+void onStartmouseClick(GLObject* object, int button, int action, int mods, double, double);
+void onResumemouseClick(GLObject* object, int button, int action, int mods, double, double);
+void onSettingsmouseClick(GLObject* object, int button, int action, int mods, double, double);
+void onExitmouseClick(GLObject* object, int button, int action, int mods, double, double);
+
 GameWindow::GameWindow()
 {
 	GLObject *start = new GLButton(840, 800, 100, 300, "newGameS.bmp");
@@ -15,4 +20,20 @@ GameWindow::GameWindow()
 
 GameWindow::~GameWindow()
 {
+}
+
+void onStartmouseClick(GLObject *object, int button, int action, int mods, double, double) {
+
+}
+
+void onResumemouseClick(GLObject *object, int button, int action, int mods, double, double) {
+
+}
+
+void onSettingsmouseClick(GLObject *object, int button, int action, int mods, double, double) {
+
+}
+
+void onExitmouseClick(GLObject *object, int button, int action, int mods, double, double) {
+
 }
