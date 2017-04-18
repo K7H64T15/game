@@ -2,7 +2,7 @@
 #include "GLWindow.h"
 #include "Constants.h"
 
-std::list<Coordinates *> * GLWindow::click_positions = new std::list<Coordinates *>();
+std::list<MouseHandler> * GLWindow::mouseHandlers = new std::list<MouseHandler>();
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos);
 void onMouseClick(GLFWwindow* window, int button, int action, int mods);
 
@@ -38,6 +38,7 @@ GLWindow::GLWindow()
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	glfwSetCursorPosCallback(window, onMouseMove);
+    glfwSetMouseButtonCallback(window, onMouseClick);
 
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -66,14 +67,19 @@ void GLWindow::loop()
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos)
 {
 
-    for (std::list<Coordinates *>::const_iterator iterator = GLWindow::click_positions->begin(),
-                 end = GLWindow::click_positions->end(); iterator != end; ++iterator) {
-        std::cout << (*iterator)->bottomY << std::endl;
+    for (std::list<MouseHandler>::const_iterator iterator = GLWindow::mouseHandlers->begin(),
+                 end = GLWindow::mouseHandlers->end(); iterator != end; ++iterator) {
+        //std::cout << (*iterator).coordinates->bottomY << std::endl;
     }
 }
 
 void onMouseClick(GLFWwindow* window, int button, int action, int mods)
 {
+    for (std::list<MouseHandler>::const_iterator iterator = GLWindow::mouseHandlers->begin(),
+                 end = GLWindow::mouseHandlers->end(); iterator != end; ++iterator) {
+        GLObject *object;
+        (*iterator).onMouseClick(object, button, action, mods, 0, 0);
+    }
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
         std::cout << "clicked" << std::endl;
 }
@@ -86,11 +92,16 @@ GLWindow::~GLWindow()
 
 void GLWindow::loadCoordinates() {
 	//TODO:: cleanup
-    click_positions->clear();
+    mouseHandlers->clear();
     std::list<Coordinates *> *coordinates = frame->getCoordinates();
+    std::list<mouseClick> *onMouseClick = frame->getOnMouseClickHandlers();
+    std::list<mouseClick>::const_iterator iterator2 = onMouseClick->begin(), end2 = onMouseClick->end();
     for (std::list<Coordinates *>::const_iterator iterator = coordinates->begin(), end = coordinates->end();
-         iterator != end; ++iterator) {
-        click_positions->push_back(*iterator);
+         iterator != end, iterator2 != end2; ++iterator, ++iterator2) {
+        MouseHandler *handler = new MouseHandler();
+        handler->coordinates = (*iterator);
+        handler->onMouseClick = (*iterator2);
+        mouseHandlers->push_back(*handler);
     }
 }
 
