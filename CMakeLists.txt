@@ -72,6 +72,7 @@ file ( COPY
         SoulRift/exitS.bmp
         SoulRift/newGameA.bmp
         SoulRift/newGameS.bmp
+        SoulRift/newGameP.bmp
         SoulRift/SettingsA.bmp
         SoulRift/settingsS.bmp
         DESTINATION

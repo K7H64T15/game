@@ -13,10 +13,10 @@ void onExitMouseMove(GLObject* object, double xpos, double ypos);
 
 GameWindow::GameWindow()
 {
-	GLObject *start = new GLButton(840, 800, 100, 300, "newGameS.bmp", "newGameA.bmp");
-	GLObject *resume = new GLButton(840, 600, 100, 300, "continueS.bmp", "continueA.bmp");
-	GLObject *settings = new GLButton(840, 400, 100, 300, "settingsS.bmp", "settingsA.bmp");
-	GLObject *exit = new GLButton(840, 200, 100, 300, "exitS.bmp", "exitA.bmp");
+	GLObject *start = new GLButton("newGameS.bmp", "newGameA.bmp", "newGameP.bmp", 840, 200, 100, 300);
+	GLObject *resume = new GLButton("continueS.bmp", "continueA.bmp", 840, 400, 100, 300);
+	GLObject *settings = new GLButton("settingsS.bmp", "settingsA.bmp", 840, 600, 100, 300);
+	GLObject *exit = new GLButton("exitS.bmp", "exitA.bmp", 840, 800, 100, 300);
 	exit->setOnMouseClick(&onExitMouseClick);
 	GLWindow::frame->addChild(start);
 	GLWindow::frame->addChild(resume);

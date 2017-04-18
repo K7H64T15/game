@@ -14,16 +14,16 @@ void GLObject::InitObject(const GLfloat points[], const int size, GLuint vbo, in
 GLObject::GLObject(int x, int y, int heigth, int width) : x(x), y(y), width(width), height(heigth)
 {
 	GLfloat g_vertex_buffer_data[] = {
-		(2 - (((float)x + width) / SCREEN_WIDTH) * 2) - 1, ((float)y / SCREEN_HEIGTH) * 2 - 1, // bottom-right
-		(2 - ((float)x / SCREEN_WIDTH) * 2) - 1, ((float)y / SCREEN_HEIGTH) * 2 - 1, // bottom-left
-		(2 - (((float)x + width) / SCREEN_WIDTH) * 2) - 1, (((float)y + heigth) / SCREEN_HEIGTH) * 2 - 1, // top-left
-		(2 - ((float)x / SCREEN_WIDTH) * 2) - 1, (((float)y + heigth) / SCREEN_HEIGTH) * 2 - 1, // top-right
+		(((float)x + width) / SCREEN_WIDTH) * 2 - 1, (2 - ((float)y / SCREEN_HEIGTH) * 2) - 1, // bottom-right
+		((float)x / SCREEN_WIDTH) * 2 - 1, (2 - ((float)y / SCREEN_HEIGTH) * 2) - 1, // bottom-left
+		(((float)x + width) / SCREEN_WIDTH * 2) - 1, (2 - (((float)y + heigth) / SCREEN_HEIGTH) * 2) - 1, // top-left
+		((float)x / SCREEN_WIDTH) * 2 - 1, (2 - (((float)y + heigth) / SCREEN_HEIGTH) * 2) - 1, // top-right
 	};
 	GLfloat uv_vertex_buffer_data[] = {
-		0.0f, 0.0f,
-		1.0f, 0.0f,
-		0.0f, 1.0f,
 		1.0f, 1.0f,
+		0.0f, 1.0f,
+		1.0f, 0.0f,
+		0.0f, 0.0f,
 	};
 	coordinates = new GLfloat[8];
 	uvcoordinates = new GLfloat[8];
@@ -74,7 +74,7 @@ GLObject::~GLObject()
 }
 
 Coordinates * GLObject::getCoordinates() {
-    return new Coordinates(x, (x + width), SCREEN_HEIGTH -  (y + height), SCREEN_HEIGTH - y);
+    return new Coordinates(x, (x + width), y, y + height);
 }
 
 void GLObject::setOnMouseClick(mouseClick onMouseClick) {
@@ -99,5 +99,5 @@ void onStandardMouseClick(GLObject *object, int button, int action, int mods, do
 
 void onStandardMouseMove(GLObject *object, double xpos, double ypos)
 {
-
+    object->active();
 }
