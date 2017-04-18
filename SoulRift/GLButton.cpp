@@ -4,11 +4,10 @@ GLButton::GLButton(int x, int y, int heigth, int width, std::string standardText
 		: GLObject(x, y, heigth, width)
 {
 	shaders = LoadShaders("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader");
-	this->standartTexture = loadBMP_custom(standardTexture.c_str());
-	this->activeTexture = loadBMP_custom(standardTexture.c_str());
+	this->standardTexture = loadBMP_custom(standardTexture.c_str());
+	this->activeTexture = loadBMP_custom(activeTexture.c_str());
 	GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
-	texture = this->standartTexture;
-    textureString = standardTexture;
+	texture = this->standardTexture;
 }
 
 void GLButton::active()
@@ -17,10 +16,15 @@ void GLButton::active()
 		texture = activeTexture;
 }
 
-void GLButton::disactive()
+void GLButton::press() {
+    if (texture != activeTexture)
+        texture = activeTexture;
+}
+
+void GLButton::deactivate()
 {
-	if (texture != standartTexture)
-		texture = standartTexture;
+	if (texture != standardTexture)
+		texture = standardTexture;
 }
 
 GLButton::~GLButton()
@@ -29,6 +33,4 @@ GLButton::~GLButton()
 	glDeleteTextures(1, &texture);
 }
 
-std::string GLButton::print() {
-    return textureString;
-}
+

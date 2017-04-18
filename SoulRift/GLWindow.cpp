@@ -69,17 +69,25 @@ void GLWindow::loop()
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos)
 {
 
-//    for (std::list<MouseHandler>::const_iterator iterator = GLWindow::mouseHandlers->begin(),
-//                 end = GLWindow::mouseHandlers->end(); iterator != end; ++iterator) {
-//        //std::cout << (*iterator).coordinates->bottomY << std::endl;
-//    }
+    std::list<GLObject *> objects = (*GLWindow::frames)[GLWindow::current]->getChildren();
+    for (std::list<GLObject *>::const_iterator iterator = objects.begin(),
+                 end = objects.end(); iterator != end; ++iterator) {
+        if ((*iterator)->getCoordinates()->leftX <= xpos && (*iterator)->getCoordinates()->rightX >= xpos &&
+            (*iterator)->getCoordinates()->bottomY <= ypos && (*iterator)->getCoordinates()->topY >= ypos) {
+            ((*iterator)->getOmMouseMove())((*iterator), xpos - (*iterator)->getCoordinates()->leftX,
+                                             ypos - (*iterator)->getCoordinates()->bottomY);
+        }
+        else
+        {
+            (*iterator)->deactivate();
+        }
+    }
 }
 
 void onMouseClick(GLFWwindow* window, int button, int action, int mods)
 {
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
-    std::cout << xpos << " " << ypos << std::endl;
     std::list<GLObject *> objects = (*GLWindow::frames)[GLWindow::current]->getChildren();
     for (std::list<GLObject *>::const_iterator iterator = objects.begin(),
                  end = objects.end(); iterator != end; ++iterator) {
@@ -90,8 +98,6 @@ void onMouseClick(GLFWwindow* window, int button, int action, int mods)
                                              ypos - (*iterator)->getCoordinates()->bottomY);
         }
     }
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-        std::cout << "clicked" << std::endl;
 }
 
 GLWindow::~GLWindow()

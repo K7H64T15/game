@@ -1,7 +1,8 @@
 #include <iostream>
 #include "GLObject.h"
 
-void onStandartMouseClick(GLObject* object, int button, int action, int mods, double xpos, double ypos);
+void onStandardMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos);
+void onStandardMouseMove(GLObject *object, double xpos, double ypos);
 
 void GLObject::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -40,7 +41,8 @@ GLObject::GLObject(int x, int y, int heigth, int width) : x(x), y(y), width(widt
 	glBindVertexArray(vao);
 	InitObject(uvcoordinates, 8 * sizeof(GLfloat), vboT, 1);
 	glBindVertexArray(1);
-    onMouseClick = &onStandartMouseClick;
+    onMouseClick = &onStandardMouseClick;
+    onMouseMove = &onStandardMouseMove;
 }
 
 void GLObject::draw()
@@ -61,7 +63,7 @@ void GLObject::active()
 {
 }
 
-void GLObject::disactive()
+void GLObject::deactivate()
 {
 }
 
@@ -79,13 +81,23 @@ void GLObject::setOnMouseClick(mouseClick onMouseClick) {
     this->onMouseClick = onMouseClick;
 }
 
-std::string GLObject::print() {
-    return "object";
+void GLObject::setOnMouseMove(mouseMove onMouseMove) {
+    this->onMouseMove = onMouseMove;
 }
 
-void onStandartMouseClick(GLObject* object, int button, int action, int mods, double xpos, double ypos)
+void onStandardMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos)
 {
-    std::cout << object->getCoordinates()->leftX << " " << object->getCoordinates()->rightX << " "
-              << object->getCoordinates()->bottomY << " " << object->getCoordinates()->topY << std::endl;
-    std::cout << object->print() << std::endl;
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {
+        object->press();
+    }
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+    {
+        object->deactivate();
+    }
+}
+
+void onStandardMouseMove(GLObject *object, double xpos, double ypos)
+{
+
 }

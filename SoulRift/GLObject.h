@@ -21,6 +21,7 @@ struct Coordinates {
 class GLObject;
 
 typedef void (*mouseClick)(GLObject*, int , int , int , double, double);
+typedef void (*mouseMove)(GLObject*, double, double);
 
 class GLObject
 {
@@ -32,16 +33,19 @@ protected:
 	GLuint shaders;
 	GLuint texture;
     mouseClick onMouseClick;
+    mouseMove onMouseMove;
 public:
 	GLObject(int x = 0, int y = 0, int heigth = 0, int width = 0);
 	void draw();
 	//void onMouseMove(double xpos, double ypos);
 	bool isMouseOnObject(double xpos, double ypos);
 	virtual void active() = 0;
-	virtual void disactive() = 0;
+    virtual void press() = 0;
+	virtual void deactivate() = 0;
     void setOnMouseClick(mouseClick onMouseClick);
     mouseClick getOnMouseClick() { return onMouseClick; }
+    void setOnMouseMove(mouseMove onMouseMove);
+    mouseMove getOmMouseMove() { return onMouseMove; }
 	Coordinates * getCoordinates();
-    virtual std::string print(); //TODO: test method. remove
 	virtual ~GLObject();
 };
