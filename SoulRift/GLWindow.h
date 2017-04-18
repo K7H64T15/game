@@ -4,7 +4,10 @@
 #include <map>
 #include <string>
 
-//static void onMouseMove(GLFWwindow* window, double xpos, double ypos);
+struct MouseHandler {
+    Coordinates *coordinates;
+    mouseClick onMouseClick;
+};
 
 class GLWindow
 {
@@ -16,8 +19,8 @@ public:
 	GLWindow();
 	void loop();
 	//friend static void onMouseMove(GLFWwindow* window, double xpos, double ypos);
-    void loadCoordinates();
-    static std::list<Coordinates *> *click_positions; //TODO: cleanup before use
+    void loadCoordinates();  //TODO: cleanup before use
+    static std::list<MouseHandler> *mouseHandlers; //TODO: move to protected block and declarate friend function
 	void setFrame(const std::string frame);
 	~GLWindow();
 };

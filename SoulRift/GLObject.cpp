@@ -1,5 +1,7 @@
 #include "GLObject.h"
 
+void onStandartMouseClick(GLObject* object, int button, int action, int mods, double xpos, double ypos);
+
 void GLObject::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, size, points, GL_STATIC_DRAW);
@@ -37,6 +39,7 @@ GLObject::GLObject(int x, int y, int heigth, int width) : x(x), y(y), width(widt
 	glBindVertexArray(vao);
 	InitObject(uvcoordinates, 8 * sizeof(GLfloat), vboT, 1);
 	glBindVertexArray(1);
+    onMouseClick = &onStandartMouseClick;
 }
 
 void GLObject::draw()
@@ -71,6 +74,11 @@ Coordinates * GLObject::getCoordinates() {
     return new Coordinates(x, x + width, y, y + height);
 }
 
-void GLObject::setOnMouseClick(mouseClick *onMouseClick) {
+void GLObject::setOnMouseClick(mouseClick onMouseClick) {
     this->onMouseClick = onMouseClick;
+}
+
+void onStandartMouseClick(GLObject* object, int button, int action, int mods, double xpos, double ypos)
+{
+
 }

@@ -80,3 +80,12 @@ std::list<Coordinates *> * GLFrame::getCoordinates() {
     }
     return result;
 }
+
+std::list<mouseClick> * GLFrame::getOnMouseClickHandlers() {
+    std::list<mouseClick> *result = new std::list<mouseClick>();
+    for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end();
+         iterator != end; ++iterator) {
+        result->push_back((*iterator)->getOnMouseClick());
+    }
+    return result;
+}

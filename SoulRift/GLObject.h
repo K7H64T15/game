@@ -31,7 +31,7 @@ protected:
 	int x, y, height, width;
 	GLuint shaders;
 	GLuint texture;
-    mouseClick *onMouseClick;
+    mouseClick onMouseClick;
 public:
 	GLObject(int x = 0, int y = 0, int heigth = 0, int width = 0);
 	void draw();
@@ -39,8 +39,8 @@ public:
 	bool isMouseOnObject(double xpos, double ypos);
 	virtual void active() = 0;
 	virtual void disactive() = 0;
-    void setOnMouseClick(mouseClick *onMouseClick);
-    mouseClick * getOnMouseClick() { return onMouseClick; }
+    void setOnMouseClick(mouseClick onMouseClick);
+    mouseClick getOnMouseClick() { return onMouseClick; }
 	Coordinates * getCoordinates();
 	virtual ~GLObject();
 };

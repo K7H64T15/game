@@ -1,11 +1,12 @@
 #include "GLButton.h"
 
-GLButton::GLButton(int x, int y, int heigth, int width, std::string standartTexture, std::string activeTexture) : GLObject(x, y, heigth, width)
+GLButton::GLButton(int x, int y, int heigth, int width, std::string standardTexture, std::string activeTexture)
+		: GLObject(x, y, heigth, width)
 {
 	shaders = LoadShaders("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader");
-	this->standartTexture = loadBMP_custom(standartTexture.c_str());
-	this->activeTexture = loadBMP_custom(standartTexture.c_str());
-	GLuint TextureID = glGetUniformLocation(shaders, "myTextureSampler");
+	this->standartTexture = loadBMP_custom(standardTexture.c_str());
+	this->activeTexture = loadBMP_custom(standardTexture.c_str());
+	GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 	texture = this->standartTexture;
 }
 

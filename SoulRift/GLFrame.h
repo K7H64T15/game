@@ -17,5 +17,7 @@ public:
 	std::list<Coordinates *> * getCoordinates();
 
     ~GLFrame();
+
+	std::list<mouseClick> *getOnMouseClickHandlers();
 };
 
