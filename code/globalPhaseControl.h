@@ -4,6 +4,8 @@
 class globalPhaseControl
 {
 private:
+        FRIEND_TEST(phaseControl, checkFlags);
+        FRIEND_TEST(phaseControl, checkStatus);
 	bool endFlag;
 	//globalEventFlags
 
