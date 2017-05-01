@@ -7,10 +7,12 @@ using namespace std;
 
 #include "field.h"
 #include "map_defines.h"
+#include "eventFlags.h"
 
 class map
 {
 public:
+	eventFlags flags;
 	field **fields;
 	int mapX, mapY;
 	int playerX, playerY;

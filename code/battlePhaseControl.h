@@ -18,10 +18,14 @@ private:
 	void spellUse(player &currentPlayer, enemy &currentEnemy, int target, int spellN);
 	void attackUse(player &currentPlayer, enemy &currentEnemy, int target, int attackType);
 
+	enemy generateEnemy(player &currentPlayer);
+
 public:
 	battlePhaseControl();
 	~battlePhaseControl();
 
+	int initBattle(player &currentPlayer, map currentMap);
 	int phaseSequence(player &currentPlayer, enemy &currentEnemy);
+	int getEnemyStat(int statN);
 };
 

@@ -83,6 +83,7 @@ void map::generateMap()
 			try_number++;
 		}
 	}
+	setVisibleArea();
 }
 
 bool map::createTunnel(int length, int direction)
@@ -212,29 +213,36 @@ void map::draw() //for console test
 	{
 		for (int j = 0; j < mapX; j++)
 		{			
-			if (fields[i][j].getEnabled() == false)
+			if (fields[i][j].getVisible() == false)
 			{
-				cout << "#";
+				cout << "+";
 			}
 			else
 			{
-				if (fields[i][j].getType() == TUNNEL)
+				if (fields[i][j].getEnabled() == false)
 				{
-					if ((i == playerY) && (j == playerX))
-					{
-						cout << "P";
-					}
-					else
-						cout << " ";
+					cout << "#";
 				}
 				else
 				{
-					if ((i == playerY) && (j == playerX))
+					if (fields[i][j].getType() == TUNNEL)
 					{
-						cout << "P";
+						if ((i == playerY) && (j == playerX))
+						{
+							cout << "P";
+						}
+						else
+							cout << " ";
 					}
 					else
-						cout << "@";
+					{
+						if ((i == playerY) && (j == playerX))
+						{
+							cout << "P";
+						}
+						else
+							cout << "@";
+					}
 				}
 			}
 			
