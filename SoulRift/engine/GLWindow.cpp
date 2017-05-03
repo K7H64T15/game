@@ -1,6 +1,7 @@
 #include <iostream>
 #include "GLWindow.h"
 #include "Constants.h"
+#include "SettingsManager.h"
 
 std::string GLWindow::current = MENU_FRAME;
 std::map<const std::string, GLFrame*> *GLWindow::frames = new std::map<const std::string, GLFrame*>();
@@ -22,7 +23,10 @@ GLWindow::GLWindow()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGTH, "Soul Rift", glfwGetPrimaryMonitor(), NULL);
+    unsigned int screenWidth = stoul(SettingsManager::getInstance()->getValue(SettingsManager::SCREEN_WIDTH));
+    unsigned int screenHeight = stoul(SettingsManager::getInstance()->getValue(SettingsManager::SCREEN_HEIGHT));
+
+	window = glfwCreateWindow(screenWidth, screenHeight, "Soul Rift", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();

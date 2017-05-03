@@ -35,17 +35,17 @@ add_definitions(
 
 # Tutorial 1
 add_executable(SoulRift
-		SoulRift/main.cpp
-		SoulRift/GameWindow.h
-		SoulRift/GameWindow.cpp
-		SoulRift/GLFrame.h
-		SoulRift/GLFrame.cpp
-		SoulRift/GLObject.h
-		SoulRift/GLObject.cpp
-		SoulRift/GLWindow.h
-		SoulRift/GLWindow.cpp
-		SoulRift/GLButton.h
-		SoulRift/GLButton.cpp
+		SoulRift/engine/main.cpp
+		SoulRift/engine/GameWindow.h
+		SoulRift/engine/GameWindow.cpp
+		SoulRift/engine/GLFrame.h
+		SoulRift/engine/GLFrame.cpp
+		SoulRift/engine/GLObject.h
+		SoulRift/engine/GLObject.cpp
+		SoulRift/engine/GLWindow.h
+		SoulRift/engine/GLWindow.cpp
+		SoulRift/engine/GLButton.h
+		SoulRift/engine/GLButton.cpp
 
 
 
@@ -53,27 +53,27 @@ add_executable(SoulRift
 	    common/shader.cpp
 	    common/texture.cpp
 	    common/texture.hpp
-        SoulRift/Constants.h)
+		SoulRift/engine/Constants.h SoulRift/engine/SettingsManager.cpp SoulRift/engine/SettingsManager.h)
 target_link_libraries(SoulRift
 	${ALL_LIBS}
 )
 
 file ( COPY
-        SoulRift/ButtonFragmentShader.fragmentshader
-        SoulRift/ButtonVertexShader.vertexshader
-        SoulRift/FrameFragmentShader.fragmentshader
-        SoulRift/FrameVertexShader.vertexshader
-        SoulRift/backA.bmp
-        SoulRift/background.bmp
-        SoulRift/backS.bmp
-        SoulRift/continueA.bmp
-        SoulRift/continueS.bmp
-        SoulRift/exitA.bmp
-        SoulRift/exitS.bmp
-        SoulRift/newGameA.bmp
-        SoulRift/newGameS.bmp
-        SoulRift/newGameP.bmp
-        SoulRift/SettingsA.bmp
-        SoulRift/settingsS.bmp
+		SoulRift/engine/ButtonFragmentShader.fragmentshader
+		SoulRift/engine/ButtonVertexShader.vertexshader
+		SoulRift/engine/FrameFragmentShader.fragmentshader
+		SoulRift/engine/FrameVertexShader.vertexshader
+		SoulRift/engine/backA.bmp
+		SoulRift/engine/background.bmp
+		SoulRift/engine/backS.bmp
+		SoulRift/engine/continueA.bmp
+		SoulRift/engine/continueS.bmp
+		SoulRift/engine/exitA.bmp
+		SoulRift/engine/exitS.bmp
+		SoulRift/engine/newGameA.bmp
+		SoulRift/engine/newGameS.bmp
+		SoulRift/engine/newGameP.bmp
+		SoulRift/engine/settingsA.bmp
+		SoulRift/engine/settingsS.bmp
         DESTINATION
         ${PROJECT_BINARY_DIR}/bin)

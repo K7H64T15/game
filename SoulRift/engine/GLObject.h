@@ -6,8 +6,6 @@
 #include <string>
 #include <common/shader.hpp>
 #include <common/texture.hpp>
-#define SCREEN_WIDTH 1920
-#define SCREEN_HEIGTH 1080
 
 struct Coordinates {
 	int leftX;

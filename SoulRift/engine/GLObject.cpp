@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GLObject.h"
+#include "SettingsManager.h"
 
 void onStandardMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos);
 void onStandardMouseMove(GLObject *object, double xpos, double ypos);
@@ -13,11 +14,14 @@ void GLObject::InitObject(const GLfloat points[], const int size, GLuint vbo, in
 
 GLObject::GLObject(int x, int y, int heigth, int width) : x(x), y(y), width(width), height(heigth)
 {
+    unsigned int screenWidth = stoul(SettingsManager::getInstance()->getValue(SettingsManager::SCREEN_WIDTH));
+    unsigned int screenHeight = stoul(SettingsManager::getInstance()->getValue(SettingsManager::SCREEN_HEIGHT));
+
 	GLfloat g_vertex_buffer_data[] = {
-		(((float)x + width) / SCREEN_WIDTH) * 2 - 1, (2 - ((float)y / SCREEN_HEIGTH) * 2) - 1, // bottom-right
-		((float)x / SCREEN_WIDTH) * 2 - 1, (2 - ((float)y / SCREEN_HEIGTH) * 2) - 1, // bottom-left
-		(((float)x + width) / SCREEN_WIDTH * 2) - 1, (2 - (((float)y + heigth) / SCREEN_HEIGTH) * 2) - 1, // top-left
-		((float)x / SCREEN_WIDTH) * 2 - 1, (2 - (((float)y + heigth) / SCREEN_HEIGTH) * 2) - 1, // top-right
+		(((float)x + width) / screenWidth) * 2 - 1, (2 - ((float)y / screenHeight) * 2) - 1, // bottom-right
+		((float)x / screenWidth) * 2 - 1, (2 - ((float)y / screenHeight) * 2) - 1, // bottom-left
+		(((float)x + width) / screenWidth * 2) - 1, (2 - (((float)y + heigth) / screenHeight) * 2) - 1, // top-left
+		((float)x / screenWidth) * 2 - 1, (2 - (((float)y + heigth) / screenHeight) * 2) - 1, // top-right
 	};
 	GLfloat uv_vertex_buffer_data[] = {
 		1.0f, 1.0f,
