@@ -1,6 +1,9 @@
 #include "GLButton.h"
+#include "Utility.h"
 
-GLButton::GLButton(std::string standardTexture, int x, int y, int heigth, int width) : GLObject(x, y, heigth, width)
+GLButton::GLButton(std::string standardTexture, int x, int y, int heigth, int width) :
+        GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
+                 Utility::getXCoordinate(width))
 {
     loadTextures(standardTexture, standardTexture, standardTexture);
     texture = this->standardTexture;
@@ -8,14 +11,17 @@ GLButton::GLButton(std::string standardTexture, int x, int y, int heigth, int wi
 
 
 GLButton::GLButton(std::string standardTexture, std::string activeTexture, int x, int y, int heigth, int width)
-		: GLObject(x, y, heigth, width)
+		: GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
+                   Utility::getXCoordinate(width))
 {
 	loadTextures(standardTexture, activeTexture, activeTexture);
 	texture = this->standardTexture;
 }
 
 GLButton::GLButton(std::string standardTexture, std::string activeTexture, std::string clickTexture, int x, int y,
-                   int heigth, int width) : GLObject(x, y, heigth, width)
+                   int heigth, int width) :
+        GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
+                 Utility::getXCoordinate(width))
 {
     loadTextures(standardTexture, activeTexture, clickTexture);
     texture = this->standardTexture;

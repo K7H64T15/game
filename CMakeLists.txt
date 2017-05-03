@@ -53,7 +53,7 @@ add_executable(SoulRift
 	    common/shader.cpp
 	    common/texture.cpp
 	    common/texture.hpp
-		SoulRift/engine/Constants.h SoulRift/engine/SettingsManager.cpp SoulRift/engine/SettingsManager.h)
+		SoulRift/engine/Constants.h SoulRift/engine/SettingsManager.cpp SoulRift/engine/SettingsManager.h SoulRift/engine/Utility.cpp SoulRift/engine/Utility.h)
 target_link_libraries(SoulRift
 	${ALL_LIBS}
 )
