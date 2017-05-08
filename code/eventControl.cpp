@@ -6,11 +6,12 @@ struct eventParam
 	int repeatTimeRoll; //min time to start again == -1 if unique
 	int choiceNum;
 };
-
+int getIofMax(int* readyEventID,int arraySize);
 eventControl::eventControl(int* eventID, map & currentMap, player & currentPlayer)// IDs of availible events
 {
 	int* readyEventID;
-	readyEventID = new int[sizeof(eventID) / sizeof(int)];
+	const int eventsNumber = sizeof(eventID) / sizeof(int);
+	readyEventID = new int[eventsNumber];
 
 	for (int i = 0; i < sizeof(eventID) / sizeof(int); i++)
 	{
@@ -25,7 +26,7 @@ eventControl::eventControl(int* eventID, map & currentMap, player & currentPlaye
 		}
 	}
 
-	void sort(int* &readyEventID);
+	void sort(int* &readyEventID,int arraySize);
 
 	int* readyEventChance;
 	readyEventChance = new int[sizeof(readyEventID) / sizeof(int)];
@@ -35,7 +36,7 @@ eventControl::eventControl(int* eventID, map & currentMap, player & currentPlaye
 		readyEventChance[i] = rand() % sizeof(readyEventID) / sizeof(int) * 10;
 	}
 
-	startEvent(getIofMax(readyEventChance), currentMap, currentPlayer);
+	startEvent(getIofMax(readyEventChance,eventsNumber), currentMap, currentPlayer);
 
 	delete readyEventID;
 	delete readyEventChance;
@@ -58,10 +59,10 @@ void eventControl::startEvent(int eventID, map & currentMap, player & currentPla
 
 bool eventControl::startEventCheck()
 {
-	if (startTimeRollCheck(param.startTimeRoll))
-		if (repeatTimeRollCheck(param.repeatTimeRoll))
-			if (flagCheck(param.flagIndex))
-				return true;
+	//if (startTimeRollCheck(param.startTimeRoll))
+	//	if (repeatTimeRollCheck(param.repeatTimeRoll))
+		//	if (flagCheck(param.flagIndex))
+		//		return true;
 	return false;
 }
 bool eventControl::flagCheck(map currentMap, int index)
@@ -107,12 +108,49 @@ string eventControl::getEventChoice(int i)
 
 
 
-void sort(int* &readyEventID)
+void sort(int* &readyEventID,int arraySize)
 {
-	//sorting & excluding 0 with realloc
+int i,j;
+
+for (j = 0; j < arraySize; j++) 
+  {
+    int i_Min = j;
+    for (i = j+1; i < arraySize; i++) {
+        if (readyEventID[i] < readyEventID[i_Min]) 
+		{
+            i_Min = i;
+        }
+    }
+
+    if(i_Min != j) 
+    {
+        swap(readyEventID[j], readyEventID[i_Min]);
+    }
+  }
+  int zeros = 0;
+  for (int i = 0;i<arraySize;i++)
+  {
+	  if (readyEventID[i]==0) zeros++;
+  }
+  int * sortedReadyEventID = new int[arraySize-zeros];
+  for (int i = zeros;i<arraySize;i++)
+  {
+	  sortedReadyEventID[i-zeros] = readyEventID[i];
+  }
+  delete readyEventID;
+  readyEventID = sortedReadyEventID;
 }
-int getIofMax(int* readyEventID)
+int getIofMax(int* readyEventID,int arraySize)
 {
-	//return index of Max
-	return 0;
+	int maxIndex = 0;
+	int max = readyEventID[0];
+	for (int i = 1; i < arraySize; i++)
+	{
+		if (readyEventID[i]>max)
+		{
+			max = readyEventID[i];
+			maxIndex = i;
+		}
+	}
+	return maxIndex;
 }
