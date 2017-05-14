@@ -250,3 +250,47 @@ void Map::draw() //for console test
 		cout << "\n";
 	}
 }
+
+void Map::saveToFile(char * name){
+	ofstream file(name,ios::out);
+	file << tunnel_max_length <<endl;
+	file << tunnel_min_length <<endl;
+	file << tunnel_max_number <<endl;
+	file << tunnel_max_try_number <<endl;
+	file << mapX << endl << mapY << endl;
+	file << playerX << endl << playerY << endl;
+	file << currentX << endl << currentY << endl;
+	file << flags;
+	for (int i = 0; i < mapY; i++)
+	{
+		for(int j =0; j < mapX;j++){
+			file << fields[i][j].enabled <<endl;
+		    file << fields[i][j].type <<endl;
+			file << fields[i][j].visible << endl;
+		}
+	}
+	file.close();
+}
+void Map::loadFromFile(char * name){
+	ifstream file(name,ios::in);
+	file >> tunnel_max_length;
+	file >> tunnel_min_length;
+	file >> tunnel_max_number;
+	file >> tunnel_max_try_number;
+	file >> mapX;
+	file >> mapY;
+	file >> playerX;
+	file >> playerY;
+	file >> currentX;
+	file >> currentY;
+	file >> flags;
+	for (int i = 0; i < mapY; i++)
+	{
+		for(int j =0; j < mapX;j++){
+			file >> fields[i][j].enabled;
+		    file >> fields[i][j].type;
+			file >> fields[i][j].visible;
+		}
+	}
+	file.close();
+}

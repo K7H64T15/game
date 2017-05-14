@@ -35,6 +35,7 @@ public:
 	void setPlayerPosition(int x, int y);
 
 	void draw(); //temp
-
+        void saveToFile(char*);
+        void loadFromFile(char * name);
 };
 
