@@ -40,8 +40,8 @@
 
 #include <limits.h>
 #include <ostream>  // NOLINT
-#include "gmock/internal/gmock-port.h"
-#include "gtest/gtest.h"
+#include "tests/googlemock/include/gmock/internal/gmock-port.h"
+#include "tests/googletest/include/gtest/gtest.h"
 
 namespace testing {
 

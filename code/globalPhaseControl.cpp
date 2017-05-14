@@ -1,5 +1,4 @@
 #include "globalPhaseControl.h"
-#include <conio.h>
 
 globalPhaseControl::globalPhaseControl()
 {
@@ -98,9 +97,9 @@ void globalPhaseControl::seePlayerList(player &currentPlayer)
 	system("cls");
 	cout << "Name: " << currentPlayer.getName() << "\n\n";
 
-	cout << "HP: " << currentPlayer.getHealthPointsCurrent() << " \ " << currentPlayer.getHealthPointsMax() << "\n";
-	cout << "MP: " << currentPlayer.getManaPointsCurrent() << " \ " << currentPlayer.getManaPointsMax() << "\n";
-	cout << "VP: " << currentPlayer.getStaminaPointsCurrent() << " \ " << currentPlayer.getStaminaPointsMax() << "\n\n";
+	cout << "HP: " << currentPlayer.getHealthPointsCurrent() << " \\ " << currentPlayer.getHealthPointsMax() << "\n";
+	cout << "MP: " << currentPlayer.getManaPointsCurrent() << " \\ " << currentPlayer.getManaPointsMax() << "\n";
+	cout << "VP: " << currentPlayer.getStaminaPointsCurrent() << " \\ " << currentPlayer.getStaminaPointsMax() << "\n\n";
 
 	cout << "STR: " << currentPlayer.getStat(STRENGTH) << "\n";
 	cout << "AGI: " << currentPlayer.getStat(AGILITY) << "\n";

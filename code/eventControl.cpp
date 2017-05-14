@@ -73,11 +73,11 @@ bool eventControl::flagCheck(map currentMap, int index)
 }
 bool eventControl::repeatTimeRollCheck(map currentMap, int time)
 {
-	return (currentMap.flags.getStartTimer >= time);
+	return (currentMap.flags.getStartTimer() >= time);
 }
 bool eventControl::startTimeRollCheck(map currentMap, int time)
 {
-	return(currentMap.flags.GetLastEventTimer >= time);
+	return(currentMap.flags.GetLastEventTimer() >= time);
 }
 
 void eventControl::setEventParam(int ID)

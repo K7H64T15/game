@@ -1,6 +1,8 @@
 #pragma once
 #include "map.h"
 #include "player.h"
+#include "../tests/googletest/include/gtest/gtest_prod.h"
+
 class globalPhaseControl
 {
 private:
