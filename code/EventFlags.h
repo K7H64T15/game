@@ -18,5 +18,12 @@ public:
 	void setFlag(int i, int value);
 	int getStartTimer();
 	int GetLastEventTimer();
+        friend ostream& operator <<(ostream &output, const EventFlags &D) {
+		output << D.startTimer << endl << D.lastEventTimer << endl
+			<< flagEventNumber;
+		for (int i=0;i<flagEventNumber;i++)
+			output << D.flag[i] << endl;
+		return output;
+	}
 };
 
