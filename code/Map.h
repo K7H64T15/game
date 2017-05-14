@@ -36,5 +36,6 @@ public:
 
 	void draw(); //temp
         void saveToFile(char*);
+        void loadFromFile(char * name);
 };
 

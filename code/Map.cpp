@@ -271,3 +271,26 @@ void Map::saveToFile(char * name){
 	}
 	file.close();
 }
+void Map::loadFromFile(char * name){
+	ifstream file(name,ios::in);
+	file >> tunnel_max_length;
+	file >> tunnel_min_length;
+	file >> tunnel_max_number;
+	file >> tunnel_max_try_number;
+	file >> mapX;
+	file >> mapY;
+	file >> playerX;
+	file >> playerY;
+	file >> currentX;
+	file >> currentY;
+	file >> flags;
+	for (int i = 0; i < mapY; i++)
+	{
+		for(int j =0; j < mapX;j++){
+			file >> fields[i][j].enabled;
+		    file >> fields[i][j].type;
+			file >> fields[i][j].visible;
+		}
+	}
+	file.close();
+}
