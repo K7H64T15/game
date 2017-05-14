@@ -1,42 +1,42 @@
-#include "creature.h"
+#include "Creature.h"
 
-creature::creature()
+Creature::Creature()
 {
 }
-creature::~creature()
+Creature::~Creature()
 {
 }
 
-void creature::setName(string value)
+void Creature::setName(string value)
 {
 	name = value;
 }
 
-void creature::setHealthPointsMax(int value)
+void Creature::setHealthPointsMax(int value)
 {
     healthPointsMax = value;
 }
-void creature::setHealthPointsCurrent(int value)
+void Creature::setHealthPointsCurrent(int value)
 {
     healthPointsCurrent = value;
 }
-void creature::setManaPointsMax(int value)
+void Creature::setManaPointsMax(int value)
 {
     manaPointsMax = value;
 }
-void creature::setManaPointsCurrent(int value)
+void Creature::setManaPointsCurrent(int value)
 {
     manaPointsCurrent = value;
 }
-void creature::setStaminaPointsMax(int value)
+void Creature::setStaminaPointsMax(int value)
 {
 	staminaPointsMax = value;
 }
-void creature::setStaminaPointsCurrent(int value)
+void Creature::setStaminaPointsCurrent(int value)
 {
 	staminaPointsCurrent = value;
 }
-void creature::setStat(int statN, int value)
+void Creature::setStat(int statN, int value)
 {
 	switch (statN)
 	{
@@ -55,35 +55,35 @@ void creature::setStat(int statN, int value)
 	}
 }
 
-string creature::getName()
+string Creature::getName()
 {
 	return name;
 }
-int creature::getHealthPointsMax()
+int Creature::getHealthPointsMax()
 {
 	return healthPointsMax;
 }
-int creature::getHealthPointsCurrent()
+int Creature::getHealthPointsCurrent()
 {
 	return healthPointsCurrent;
 }
-int creature::getManaPointsMax()
+int Creature::getManaPointsMax()
 {
 	return manaPointsMax;
 }
-int creature::getManaPointsCurrent()
+int Creature::getManaPointsCurrent()
 {
 	return manaPointsCurrent;
 }
-int creature::getStaminaPointsMax()
+int Creature::getStaminaPointsMax()
 {
 	return staminaPointsMax;
 }
-int creature::getStaminaPointsCurrent()
+int Creature::getStaminaPointsCurrent()
 {
 	return staminaPointsCurrent;
 }
-int creature::getStat(int statN)
+int Creature::getStat(int statN)
 {
 	switch (statN)
 	{
@@ -96,7 +96,7 @@ int creature::getStat(int statN)
 	}
 }
 
-bool creature::getPerk(int perkN)
+bool Creature::getPerk(int perkN)
 {
 	switch (perkN)
 	{
@@ -105,7 +105,7 @@ bool creature::getPerk(int perkN)
 	return false;
 }
 
-bool * creature::getPrekList()
+bool * Creature::getPrekList()
 {
 	bool *perkList = new bool[perk.count];
 	for (int i = 0; i < perk.count; i++)
@@ -115,12 +115,12 @@ bool * creature::getPrekList()
 	return nullptr;
 }
 
-int * creature::getSkill(int skillN)
+int * Creature::getSkill(int skillN)
 {
 	return nullptr;
 }
 
-int ** creature::getSkillList()
+int ** Creature::getSkillList()
 {
 	return nullptr;
 }

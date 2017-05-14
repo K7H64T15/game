@@ -5,7 +5,7 @@
 #define HORIZONTAL 0
 #define VERTICAL 1
 
-class field
+class Field
 {
 private:
 	bool enabled;
@@ -15,8 +15,8 @@ private:
 public:
 	friend class gmap;
 
-	field();
-	~field();
+	Field();
+	~Field();
 
 	void setTunnel(int orientation);
 	void setRoom();

@@ -36,31 +36,31 @@ add_definitions(
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(game
-        code/battlePhaseControl.h
-        code/creature.cpp
-        code/creature.h
-        code/creature_defines.h
-        code/enemy.cpp
-        code/enemy.h
-        code/eventControl.cpp
-        code/eventControl.h
-        code/eventFlags.cpp
-        code/eventFlags.h
-        code/field.cpp
-        code/field.h
+        code/BattlePhaseControl.h
+        code/Creature.cpp
+        code/Creature.h
+        code/CreatureDefines.h
+        code/Enemy.cpp
+        code/Enemy.h
+        code/EventControl.cpp
+        code/EventControl.h
+        code/EventFlags.cpp
+        code/EventFlags.h
+        code/Field.cpp
+        code/Field.h
         code/globalPhaseControl.cpp
         code/globalPhaseControl.h
         #code/main.cpp # for console prject
-        code/map.cpp
-        code/map.h
-        code/map_defines.h
-        code/perks.cpp
-        code/perks.h
-        code/player.cpp
-        code/player.h
-        code/skills.h
-        code/stats.cpp
-        code/stats.h
+        code/Map.cpp
+        code/Map.h
+        code/MapDefines.h
+        code/Perks.cpp
+        code/Perks.h
+        code/Player.cpp
+        code/Player.h
+        code/Skills.h
+        code/Stats.cpp
+        code/Stats.h
         engine/GameWindow.cpp
         engine/GameWindow.h
         engine/GLButton.cpp
@@ -83,7 +83,8 @@ add_executable(game
         common/shader.cpp
         common/texture.cpp
         common/texture.hpp
-        code/skills.cpp)
+        code/Skills.cpp
+        code/BattlePhaseControl.cpp)
 
 target_link_libraries(game
         ${ALL_LIBS})
@@ -98,13 +99,18 @@ file ( COPY
         resources/backS.bmp
         resources/continueA.bmp
         resources/continueS.bmp
+        resources/continueP.bmp
         resources/exitA.bmp
         resources/exitS.bmp
+        resources/exitP.bmp
         resources/newGameA.bmp
         resources/newGameS.bmp
         resources/newGameP.bmp
         resources/settingsA.bmp
         resources/settingsS.bmp
+        resources/settingsP.bmp
+        resources/wall.bmp
+        resources/tunel.bmp
         resources/parametres.config
         DESTINATION
         ${PROJECT_BINARY_DIR}/bin)

@@ -6,7 +6,7 @@ const int PERCEPTION = 3;
 const int INTELLIGENCE = 4;
 const int CHARISMA = 5;
 
-class stats
+class Stats
 {
 private:
 
@@ -19,8 +19,8 @@ private:
 
 public:
 
-	stats();
-	~stats();
+	Stats();
+	~Stats();
 
 	void setStrength(int value);
 	void setAgility(int value);

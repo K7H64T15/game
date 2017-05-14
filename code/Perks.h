@@ -1,9 +1,9 @@
 #pragma once
-class perks
+class Perks
 {
 public:
 	int count; // number of perks
 	//bool perks list
-	perks();
-	~perks();
+	Perks();
+	~Perks();
 };

@@ -8,7 +8,7 @@ globalPhaseControl::~globalPhaseControl()
 {
 }
 
-int globalPhaseControl::phaseSequence(map &currentMap, player &currentPlayer)
+int globalPhaseControl::phaseSequence(Map &currentMap, Player &currentPlayer)
 {
 	movePhase(currentMap, currentPlayer);
 	checkPosition(currentMap);
@@ -19,7 +19,7 @@ int globalPhaseControl::phaseSequence(map &currentMap, player &currentPlayer)
 	return endPhase();
 }
 
-int globalPhaseControl::movePhase(map &currentMap, player &currentPlayer)
+int globalPhaseControl::movePhase(Map &currentMap, Player &currentPlayer)
 {
 	system("cls");
 	currentMap.draw();
@@ -50,7 +50,7 @@ int globalPhaseControl::movePhase(map &currentMap, player &currentPlayer)
 	}
 	return 0;
 }
-int globalPhaseControl::checkPosition(map &currentMap)
+int globalPhaseControl::checkPosition(Map &currentMap)
 {
 	//check field type for event gen
 	return 0;
@@ -69,7 +69,7 @@ int globalPhaseControl::checkFlags()
 	globalEventPhase();
 	return 0;
 }
-void globalPhaseControl::checkStatus(player &currentPlayer)
+void globalPhaseControl::checkStatus(Player &currentPlayer)
 {
 	if (currentPlayer.getHealthPointsCurrent() <= 0)
 	{
@@ -92,7 +92,7 @@ int globalPhaseControl::endPhase()
 
 
 
-void globalPhaseControl::seePlayerList(player &currentPlayer)
+void globalPhaseControl::seePlayerList(Player &currentPlayer)
 {
 	system("cls");
 	cout << "Name: " << currentPlayer.getName() << "\n\n";
@@ -112,7 +112,7 @@ void globalPhaseControl::seePlayerList(player &currentPlayer)
 
 }
 
-void globalPhaseControl::seeGlobalMap(map &currentMap)
+void globalPhaseControl::seeGlobalMap(Map &currentMap)
 {
 
 }

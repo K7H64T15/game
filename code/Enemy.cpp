@@ -1,8 +1,8 @@
-#include "player.h"
+#include "Enemy.h"
 
-player::player()
+Enemy::Enemy()
 {
-	setName("player");
+	setName("noName");
 
 	setStat(STRENGTH, 5);
 	setStat(AGILITY, 5);
@@ -19,10 +19,8 @@ player::player()
 
 	setStaminaPointsMax(getStat(CONSTITUTION) * CREATURE_STAMINA_CON_FACTOR + getStat(STRENGTH) * CREATURE_STAMINA_STR_FACTOR);
 	setStaminaPointsCurrent(getStaminaPointsMax());
-
 }
 
-
-player::~player()
+Enemy::~Enemy()
 {
 }

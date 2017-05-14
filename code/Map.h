@@ -5,15 +5,15 @@
 #include <Windows.h>
 using namespace std;
 
-#include "field.h"
-#include "map_defines.h"
-#include "eventFlags.h"
+#include "Field.h"
+#include "MapDefines.h"
+#include "EventFlags.h"
 
-class map
+class Map
 {
 public:
-	eventFlags flags;
-	field **fields;
+	EventFlags flags;
+	Field **fields;
 	int mapX, mapY;
 	int playerX, playerY;
 	int currentX, currentY;
@@ -23,9 +23,9 @@ public:
 	int tunnel_min_length;
 	int tunnel_max_try_number;
 
-	map();
-	map(int tempMapX, int tempMapY, int tempStartX, int tempStartY);
-	~map();
+	Map();
+	Map(int tempMapX, int tempMapY, int tempStartX, int tempStartY);
+	~Map();
 	
 	void generateMap();
 	bool createTunnel(int length, int direction);

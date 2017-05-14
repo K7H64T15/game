@@ -1,4 +1,4 @@
-#include "eventControl.h"
+#include "EventControl.h"
 struct eventParam
 {
 	int flagIndex;		// == -1 if no flag
@@ -7,7 +7,7 @@ struct eventParam
 	int choiceNum;
 };
 int getIofMax(int* readyEventID,int arraySize);
-eventControl::eventControl(int* eventID, map & currentMap, player & currentPlayer)// IDs of availible events
+EventControl::EventControl(int* eventID, Map & currentMap, Player & currentPlayer)// IDs of availible events
 {
 	int* readyEventID;
 	const int eventsNumber = sizeof(eventID) / sizeof(int);
@@ -43,12 +43,12 @@ eventControl::eventControl(int* eventID, map & currentMap, player & currentPlaye
 }
 
 
-eventControl::~eventControl()
+EventControl::~EventControl()
 {
 
 }
 
-void eventControl::startEvent(int eventID, map & currentMap, player & currentPlayer)
+void EventControl::startEvent(int eventID, Map & currentMap, Player & currentPlayer)
 {
 	setEventParam(eventID);
 	setEventTexts(eventID);
@@ -57,7 +57,7 @@ void eventControl::startEvent(int eventID, map & currentMap, player & currentPla
 }
 
 
-bool eventControl::startEventCheck()
+bool EventControl::startEventCheck()
 {
 	//if (startTimeRollCheck(param.startTimeRoll))
 	//	if (repeatTimeRollCheck(param.repeatTimeRoll))
@@ -65,43 +65,43 @@ bool eventControl::startEventCheck()
 		//		return true;
 	return false;
 }
-bool eventControl::flagCheck(map currentMap, int index)
+bool EventControl::flagCheck(Map currentMap, int index)
 {
 	if (index < 0)
 		return false;
 	return currentMap.flags.getFlag(index);
 }
-bool eventControl::repeatTimeRollCheck(map currentMap, int time)
+bool EventControl::repeatTimeRollCheck(Map currentMap, int time)
 {
 	return (currentMap.flags.getStartTimer() >= time);
 }
-bool eventControl::startTimeRollCheck(map currentMap, int time)
+bool EventControl::startTimeRollCheck(Map currentMap, int time)
 {
 	return(currentMap.flags.GetLastEventTimer() >= time);
 }
 
-void eventControl::setEventParam(int ID)
+void EventControl::setEventParam(int ID)
 {
 	//read from file
 }
-void eventControl::setEventTexts(int ID)
+void EventControl::setEventTexts(int ID)
 {
 	//read from file
 }
 
-int eventControl::getChoiceNum()
+int EventControl::getChoiceNum()
 {
 	return param.choiceNum;
 }
-string eventControl::getEventName()
+string EventControl::getEventName()
 {
 	return eventName;
 }
-string eventControl::getEventText()
+string EventControl::getEventText()
 {
 	return eventText;
 }
-string eventControl::getEventChoice(int i)
+string EventControl::getEventChoice(int i)
 {
 	return eventChoice[i];
 }

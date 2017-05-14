@@ -2,8 +2,8 @@
 #include <time.h>
 using namespace std;
 
-#include "map.h"
-#include "player.h"
+#include "Map.h"
+#include "Player.h"
 #include "globalPhaseControl.h"
 
 int main()

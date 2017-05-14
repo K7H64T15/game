@@ -2,12 +2,12 @@
 #include <string>
 using namespace std;
 
-#include "stats.h"
-#include "perks.h"
-#include "skills.h"
-#include "creature_defines.h"
+#include "Stats.h"
+#include "Perks.h"
+#include "Skills.h"
+#include "CreatureDefines.h"
 
-class creature
+class Creature
 {
 private:
 
@@ -20,14 +20,14 @@ private:
     int staminaPointsMax;
     int staminaPointsCurrent;
 
-	stats stat;
-	perks perk;
-	skills skill;
+	Stats stat;
+	Perks perk;
+	Skills skill;
 
 public:
 
-	creature();
-	~creature();
+	Creature();
+	~Creature();
 
 	void setName(string value);
 	void setHealthPointsMax(int value);

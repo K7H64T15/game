@@ -1,6 +1,6 @@
-#include "map.h"
+#include "Map.h"
 
-map::map()
+Map::Map()
 {
 	mapX = MAP_BASE_SIZE_X;
 	mapY = MAP_BASE_SIZE_Y;
@@ -14,16 +14,16 @@ map::map()
 	tunnel_max_length = MAP_BASE_TUNNEL_MAX_LENGTH;	
 	tunnel_max_try_number = MAP_BASE_TUNNEL_MAX_TRY_NUMBER;
 
-	fields = new field*[mapY];
+	fields = new Field*[mapY];
 	for (int i = 0; i < mapY; i++)
 	{
-		fields[i] = new field[mapX];
+		fields[i] = new Field[mapX];
 	}
 
 	generateMap();
 }
 
-map::map(int tempMapX, int tempMapY, int tempStartX, int tempStartY)
+Map::Map(int tempMapX, int tempMapY, int tempStartX, int tempStartY)
 {
 	mapX = tempMapX;
 	mapY = tempMapY;
@@ -37,16 +37,16 @@ map::map(int tempMapX, int tempMapY, int tempStartX, int tempStartY)
 	tunnel_max_length = MAP_BASE_TUNNEL_MAX_LENGTH;
 	tunnel_max_try_number = MAP_BASE_TUNNEL_MAX_TRY_NUMBER;
 	
-	fields = new field*[mapY];
+	fields = new Field*[mapY];
 	for (int i = 0; i < mapY; i++)
 	{
-		fields[i] = new field[mapX];
+		fields[i] = new Field[mapX];
 	}
 	
 	generateMap();
 }
 
-map::~map()
+Map::~Map()
 {
 	for (int i = 0; i < mapY; i++)
 	{
@@ -55,7 +55,7 @@ map::~map()
 	delete fields;
 }
 
-void map::generateMap()
+void Map::generateMap()
 {
 	int direction = rand() % 4;
 	int tunnel_length;
@@ -86,7 +86,7 @@ void map::generateMap()
 	setVisibleArea();
 }
 
-bool map::createTunnel(int length, int direction)
+bool Map::createTunnel(int length, int direction)
 {
 	int dirX = 0;
 	int	dirY = 0;
@@ -141,7 +141,7 @@ bool map::createTunnel(int length, int direction)
 	return true;
 }
 
-bool map::movePlayer(int direction)
+bool Map::movePlayer(int direction)
 {
 	switch (direction)
 	{
@@ -185,7 +185,7 @@ bool map::movePlayer(int direction)
 	return false;
 }
 
-void map::setVisibleArea()
+void Map::setVisibleArea()
 {
 	fields[playerY - 1][playerX - 1].setVisible();
 	fields[playerY - 1][playerX].setVisible();
@@ -200,13 +200,13 @@ void map::setVisibleArea()
 	fields[playerY + 1][playerX + 1].setVisible();
 }
 
-void map::setPlayerPosition(int x, int y)
+void Map::setPlayerPosition(int x, int y)
 {
 	playerX = x;
 	playerY = y;
 }
 
-void map::draw() //for console test
+void Map::draw() //for console test
 {
 	system("cls");
 	for (int i = 0; i < mapY; i++)

@@ -2,7 +2,7 @@
 
 const int flagEventNumber = 0;
 
-class eventFlags
+class EventFlags
 {
 private:
 	int *flag;
@@ -11,8 +11,8 @@ private:
 
 public:
 
-	eventFlags();
-	~eventFlags();
+	EventFlags();
+	~EventFlags();
 
 	int getFlag(int i);
 	void setFlag(int i, int value);
