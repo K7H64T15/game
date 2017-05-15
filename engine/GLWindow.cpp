@@ -60,7 +60,7 @@ GLWindow::GLWindow()
     GLFrame *menuFrame = new GLFrame();
 	GLWindow::frame = menuFrame;
     (*GLWindow::frames)[Constants::MENU_FRAME] = menuFrame;
-	GLFrame *gameFrame = new GLFrame();
+	GLFrame *gameFrame = new GLFrame("blackBackground.bmp");
 	GLFrame *settingsFrame = new GLFrame();
     (*GLWindow::frames)[Constants::GAME_FRAME] = gameFrame;
     (*GLWindow::frames)[Constants::SETTINGS_FRAME] = settingsFrame;

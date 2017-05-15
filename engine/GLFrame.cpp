@@ -1,4 +1,5 @@
 #include "GLFrame.h"
+#include "ResourceFactory.h"
 
 void GLFrame::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -7,7 +8,7 @@ void GLFrame::InitObject(const GLfloat points[], const int size, GLuint vbo, int
 	glVertexAttribPointer((GLuint) arrayNum, 2, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
-GLFrame::GLFrame()
+GLFrame::GLFrame(std::string background)
 {
 	GLfloat g_vertex_buffer_data[] = {
 		1.0f, -1.0f, // bottom-right
@@ -28,8 +29,9 @@ GLFrame::GLFrame()
 		coordinates[i] = g_vertex_buffer_data[i];
 		uvcoordinates[i] = uv_vertex_buffer_data[i];
 	}
-	shaders = LoadShaders("FrameVertexShader.vertexshader", "FrameFragmentShader.fragmentshader");
-	texture = loadBMP_custom("background.bmp");
+	shaders = ResourceFactory::getInstance()->getShader(Shader("FrameVertexShader.vertexshader",
+															   "FrameFragmentShader.fragmentshader"));
+	texture = loadBMP_custom(background.c_str());
 	GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 	glGenBuffers(1, &vbo);
 	glGenVertexArrays(1, &vao);

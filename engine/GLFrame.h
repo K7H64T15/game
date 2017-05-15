@@ -11,7 +11,7 @@ class GLFrame
 	std::list<GLObject*> children;
 	void InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum);
 public:
-	GLFrame();
+	GLFrame(std::string background="background.bmp");
 	void addChild(GLObject *child);
 	void draw();
 	std::list<Coordinates *> * getCoordinates();

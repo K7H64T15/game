@@ -96,6 +96,7 @@ file ( COPY
         resources/FrameVertexShader.vertexshader
         resources/backA.bmp
         resources/background.bmp
+        resources/blackBackground.bmp
         resources/backS.bmp
         resources/continueA.bmp
         resources/continueS.bmp
