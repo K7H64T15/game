@@ -84,7 +84,7 @@ add_executable(game
         common/texture.cpp
         common/texture.hpp
         code/Skills.cpp
-        code/BattlePhaseControl.cpp)
+        code/BattlePhaseControl.cpp engine/ResourseFactory.cpp engine/ResourseFactory.h)
 
 target_link_libraries(game
         ${ALL_LIBS})

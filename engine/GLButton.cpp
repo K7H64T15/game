@@ -1,5 +1,6 @@
 #include "GLButton.h"
 #include "Utility.h"
+#include "ResourseFactory.h"
 
 GLButton::GLButton(std::string standardTexture, int x, int y, int heigth, int width) :
         GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
@@ -30,9 +31,9 @@ GLButton::GLButton(std::string standardTexture, std::string activeTexture, std::
 void GLButton::loadTextures(std::string standardTexture, std::string activeTexture, std::string clickTexture)
 {
     shaders = LoadShaders("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader");
-    this->standardTexture = loadBMP_custom(standardTexture.c_str());
-    this->activeTexture = loadBMP_custom(activeTexture.c_str());
-    this->onClickTexture = loadBMP_custom(clickTexture.c_str());
+    this->standardTexture = ResourseFactory::getInstance()->getTexture(standardTexture);
+    this->activeTexture = ResourseFactory::getInstance()->getTexture(activeTexture);
+    this->onClickTexture = ResourseFactory::getInstance()->getTexture(clickTexture);
     GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 }
 
