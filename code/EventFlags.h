@@ -26,7 +26,7 @@ public:
 			output << D.flag[i] << endl;
 		return output;
 	}
-	friend istream& operator >>(istream &input,eventFlags &D) {
+	friend istream& operator >>(istream &input,EventFlags &D) {
 		input >> D.startTimer;
 		input >> D.lastEventTimer;
 		//input >> flagEventNumber;  Анатолий: они не используются пока

@@ -8,6 +8,8 @@
 
 const std::string SettingsManager::SCREEN_HEIGHT = "screen_height";
 const std::string SettingsManager::SCREEN_WIDTH = "screen_width";
+const std::string SettingsManager::FULLSCREEN = "fullscreen";
+
 SettingsManager *SettingsManager::instance = nullptr;
 
 std::string SettingsManager::getValue(std::string key) {

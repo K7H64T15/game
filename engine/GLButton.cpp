@@ -1,6 +1,6 @@
 #include "GLButton.h"
 #include "Utility.h"
-#include "ResourseFactory.h"
+#include "ResourceFactory.h"
 
 GLButton::GLButton(std::string standardTexture, int x, int y, int heigth, int width) :
         GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
@@ -30,10 +30,10 @@ GLButton::GLButton(std::string standardTexture, std::string activeTexture, std::
 
 void GLButton::loadTextures(std::string standardTexture, std::string activeTexture, std::string clickTexture)
 {
-    shaders = LoadShaders("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader");
-    this->standardTexture = ResourseFactory::getInstance()->getTexture(standardTexture);
-    this->activeTexture = ResourseFactory::getInstance()->getTexture(activeTexture);
-    this->onClickTexture = ResourseFactory::getInstance()->getTexture(clickTexture);
+    shaders = ResourceFactory::getInstance()->getShader(Shader("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader"));//LoadShaders("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader");
+    this->standardTexture = ResourceFactory::getInstance()->getTexture(standardTexture);
+    this->activeTexture = ResourceFactory::getInstance()->getTexture(activeTexture);
+    this->onClickTexture = ResourceFactory::getInstance()->getTexture(clickTexture);
     GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 }
 

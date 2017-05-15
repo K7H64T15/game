@@ -14,6 +14,7 @@ class SettingsManager {
 public:
     static const std::string SCREEN_HEIGHT;
     static const std::string SCREEN_WIDTH;
+    static const std::string FULLSCREEN;
     static SettingsManager *getInstance();
     std::string getValue(std::string);
 private:

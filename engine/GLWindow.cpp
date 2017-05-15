@@ -26,7 +26,16 @@ GLWindow::GLWindow()
     unsigned int screenWidth = stoul(SettingsManager::getInstance()->getValue(SettingsManager::SCREEN_WIDTH));
     unsigned int screenHeight = stoul(SettingsManager::getInstance()->getValue(SettingsManager::SCREEN_HEIGHT));
 
-	window = glfwCreateWindow(screenWidth, screenHeight, "Soul Rift", glfwGetPrimaryMonitor(), NULL);
+	bool fullscreen = static_cast<bool>(stoi(SettingsManager::getInstance()->getValue(SettingsManager::FULLSCREEN)));
+
+	GLFWmonitor *monitor = NULL;
+
+	if (fullscreen)
+	{
+		monitor = glfwGetPrimaryMonitor();
+	}
+
+	window = glfwCreateWindow(screenWidth, screenHeight, "Soul Rift", monitor, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
