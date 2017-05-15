@@ -7,6 +7,7 @@
 
 class Field
 {
+    friend class Map;
 private:
 	bool enabled;
 	bool visible;
