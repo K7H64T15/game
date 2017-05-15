@@ -11,7 +11,8 @@ GLField::GLField(std::string standardTexture, int x, int y, int heigth, int widt
 }
 
 void GLField::loadTextures(std::string standardTexture) {
-    shaders = LoadShaders("ButtonVertexShader.vertexshader", "ButtonFragmentShader.fragmentshader");
+    shaders = ResourceFactory::getInstance()->getShader(Shader("ButtonVertexShader.vertexshader",
+                                                               "ButtonFragmentShader.fragmentshader"));
     this->standardTexture = ResourceFactory::getInstance()->getTexture(standardTexture);
     GLuint TextureID = (GLuint) glGetUniformLocation(shaders, "myTextureSampler");
 }
