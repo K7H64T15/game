@@ -2,8 +2,8 @@
 #include "GLObject.h"
 #include "SettingsManager.h"
 
-void onStandardMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos);
-void onStandardMouseMove(GLObject *object, double xpos, double ypos);
+void onStandardMouseClick(IGLObject *object, int button, int action, int mods, double xpos, double ypos);
+void onStandardMouseMove(IGLObject *object, double xpos, double ypos);
 
 void GLObject::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -63,14 +63,6 @@ bool GLObject::isMouseOnObject(double xpos, double ypos)
 	return (x <= xpos && (x + width) >= xpos && y  <= ypos && (y + height) >= ypos);
 }
 
-void GLObject::active()
-{
-}
-
-void GLObject::deactivate()
-{
-}
-
 GLObject::~GLObject()
 {
 	glDeleteBuffers(1, &vbo);
@@ -89,7 +81,7 @@ void GLObject::setOnMouseMove(mouseMove onMouseMove) {
     this->onMouseMove = onMouseMove;
 }
 
-void onStandardMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos)
+void onStandardMouseClick(IGLObject *object, int button, int action, int mods, double xpos, double ypos)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
     {
@@ -101,7 +93,7 @@ void onStandardMouseClick(GLObject *object, int button, int action, int mods, do
     }
 }
 
-void onStandardMouseMove(GLObject *object, double xpos, double ypos)
+void onStandardMouseMove(IGLObject *object, double xpos, double ypos)
 {
     object->active();
 }

@@ -14,12 +14,15 @@ add_definitions(
 ### GLFW ###
 
 add_subdirectory (glfw-3.1.2)
+add_subdirectory(freetype)
 
 include_directories(
 	glfw-3.1.2/include/GLFW/
 	glfw-3.1.2/deps/
 	glfw-3.1.2/deps/glad/
 	glew-1.13.0/include/
+	freetype/
+		freetype/include/
 )
 
 set(GLAD "glfw-3.1.2/deps/glad/glad.h"

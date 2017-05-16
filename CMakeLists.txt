@@ -9,7 +9,7 @@ include_directories(
         external/glfw-3.1.2/include/GLFW/
         external/glm-0.9.7.1/
         external/glew-1.13.0/include/
-        external/freetype-2.3.5/include/
+        external/freetype/include/
         .
 )
 
@@ -21,6 +21,7 @@ set(ALL_LIBS
         ${OPENGL_LIBRARY}
         glfw
         GLEW_1130
+        freetype
         )
 
 set( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin )
@@ -33,7 +34,13 @@ add_definitions(
         -D_CRT_SECURE_NO_WARNINGS
 )
 
+#find_package(Freetype REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+
+
 set(CMAKE_CXX_STANDARD 11)
+SET(GCC_COVERAGE_LINK_FLAGS    "-static -static-libgcc -static-libstdc++")
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
 add_executable(game
         code/BattlePhaseControl.h
@@ -84,10 +91,12 @@ add_executable(game
         common/texture.cpp
         common/texture.hpp
         code/Skills.cpp
-        code/BattlePhaseControl.cpp engine/ResourceFactory.cpp engine/ResourceFactory.h engine/GLPanel.cpp engine/GLPanel.h)
+        code/BattlePhaseControl.cpp engine/ResourceFactory.cpp engine/ResourceFactory.h engine/GLPanel.cpp engine/GLPanel.h engine/GLText.cpp engine/GLText.h engine/Shader.cpp engine/Shader.h engine/IGLObject.h)
 
 target_link_libraries(game
         ${ALL_LIBS})
+
+target_link_libraries(game ${FREETYPE_LIBRARIES})
 
 file ( COPY
         resources/ButtonFragmentShader.fragmentshader

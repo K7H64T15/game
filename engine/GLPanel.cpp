@@ -26,7 +26,7 @@ void GLPanel::press() {
 }
 
 void GLPanel::addChild(GLObject *child) {
-
+    children.push_back(child);
 }
 
 std::list<GLObject *> GLPanel::getChildren() {

@@ -14,7 +14,6 @@ public:
 	GLWindow();
 	void loop();
 	//friend static void onMouseMove(GLFWwindow* window, double xpos, double ypos);
-    void loadCoordinates();  //TODO: cleanup before use
     static std::map<const std::string, GLFrame*> *frames;
     static std::string current;
     static void closeWindow();

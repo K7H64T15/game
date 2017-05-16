@@ -3,18 +3,20 @@
 #include "GameWindow.h"
 #include "Constants.h"
 #include "GLField.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 GameWindow *GameWindow::instance = nullptr;
 
-void onStartMouseClick(GLObject *object, int button, int action, int mods, double, double);
-void onResumeMouseClick(GLObject *object, int button, int action, int mods, double, double);
-void onSettingsMouseClick(GLObject *object, int button, int action, int mods, double, double);
-void onExitMouseClick(GLObject *object, int button, int action, int mods, double, double);
+void onStartMouseClick(IGLObject *object, int button, int action, int mods, double, double);
+void onResumeMouseClick(IGLObject *object, int button, int action, int mods, double, double);
+void onSettingsMouseClick(IGLObject *object, int button, int action, int mods, double, double);
+void onExitMouseClick(IGLObject *object, int button, int action, int mods, double, double);
 
-void onStartMouseMove(GLObject* object, double xpos, double ypos);
-void onResumeMouseMove(GLObject* object, double xpos, double ypos);
-void onSettingsMouseMove(GLObject* object, double xpos, double ypos);
-void onExitMouseMove(GLObject* object, double xpos, double ypos);
+void onStartMouseMove(IGLObject* object, double xpos, double ypos);
+void onResumeMouseMove(IGLObject* object, double xpos, double ypos);
+void onSettingsMouseMove(IGLObject* object, double xpos, double ypos);
+void onExitMouseMove(IGLObject* object, double xpos, double ypos);
 
 GameWindow::GameWindow()
 {
@@ -28,7 +30,6 @@ GameWindow::GameWindow()
 	GLWindow::frame->addChild(resume);
 	GLWindow::frame->addChild(settings);
 	GLWindow::frame->addChild(exit);
-	loadCoordinates();
 }
 
 GameWindow::~GameWindow()
@@ -43,7 +44,7 @@ GameWindow *GameWindow::getInstance() {
 	return instance;
 }
 
-void onStartMouseClick(GLObject *object, int button, int action, int mods, double, double)
+void onStartMouseClick(IGLObject *object, int button, int action, int mods, double, double)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
     {
@@ -74,19 +75,20 @@ void onStartMouseClick(GLObject *object, int button, int action, int mods, doubl
             (*GameWindow::getInstance()->frames)[Constants::GAME_FRAME]->addChild(texture);
         }
     }
+    //auto text = new Tex
 }
 
-void onResumeMouseClick(GLObject *object, int button, int action, int mods, double, double)
+void onResumeMouseClick(IGLObject *object, int button, int action, int mods, double, double)
 {
 
 }
 
-void onSettingsMouseClick(GLObject *object, int button, int action, int mods, double, double)
+void onSettingsMouseClick(IGLObject *object, int button, int action, int mods, double, double)
 {
 
 }
 
-void onExitMouseClick(GLObject *object, int button, int action, int mods, double, double)
+void onExitMouseClick(IGLObject *object, int button, int action, int mods, double, double)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
     {
@@ -99,22 +101,22 @@ void onExitMouseClick(GLObject *object, int button, int action, int mods, double
     }
 }
 
-void onStartMouseMove(GLObject* object, double xpos, double ypos)
+void onStartMouseMove(IGLObject* object, double xpos, double ypos)
 {
 
 }
 
-void onResumeMouseMove(GLObject* object, double xpos, double ypos)
+void onResumeMouseMove(IGLObject* object, double xpos, double ypos)
 {
 
 }
 
-void onSettingsMouseMove(GLObject* object, double xpos, double ypos)
+void onSettingsMouseMove(IGLObject* object, double xpos, double ypos)
 {
 
 }
 
-void onExitMouseMove(GLObject* object, double xpos, double ypos)
+void onExitMouseMove(IGLObject* object, double xpos, double ypos)
 {
 
 }

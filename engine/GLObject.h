@@ -7,21 +7,14 @@
 #include <common/shader.hpp>
 #include <common/texture.hpp>
 
-struct Coordinates {
-	int leftX;
-	int rightX;
-	int bottomY;
-	int topY;
-	Coordinates(int leftX, int rightX, int bottomY, int topY) : leftX(leftX), rightX(rightX), bottomY(bottomY),
-																topY(topY) {};
-};
-
 class GLObject;
 
-typedef void (*mouseClick)(GLObject*, int , int , int , double, double);
-typedef void (*mouseMove)(GLObject*, double, double);
+#include "IGLObject.h"
 
-class GLObject
+//typedef void (*mouseClick)(GLObject*, int , int , int , double, double);
+//typedef void (*mouseMove)(GLObject*, double, double);
+
+class GLObject : public IGLObject
 {
 	GLuint vao, vbo, vboT;
 	GLfloat* coordinates, *uvcoordinates;
@@ -34,12 +27,9 @@ protected:
     mouseMove onMouseMove;
 public:
 	GLObject(int x = 0, int y = 0, int heigth = 0, int width = 0);
-	void draw();
+	virtual void draw();
 	//void onMouseMove(double xpos, double ypos);
 	bool isMouseOnObject(double xpos, double ypos);
-	virtual void active() = 0;
-    virtual void press() = 0;
-	virtual void deactivate() = 0;
     void setOnMouseClick(mouseClick onMouseClick);
     mouseClick getOnMouseClick() { return onMouseClick; }
     void setOnMouseMove(mouseMove onMouseMove);

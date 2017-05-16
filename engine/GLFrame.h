@@ -8,14 +8,14 @@ class GLFrame
 	GLfloat* coordinates, *uvcoordinates;
 	GLuint shaders;
 	GLuint texture;
-	std::list<GLObject*> children;
+	std::list<IGLObject*> children;
 	void InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum);
 public:
 	GLFrame(std::string background="background.bmp");
-	void addChild(GLObject *child);
+	void addChild(IGLObject *child);
 	void draw();
 	std::list<Coordinates *> * getCoordinates();
-    std::list<GLObject*> getChildren();
+    std::list<IGLObject*> getChildren();
     ~GLFrame();
 	std::list<mouseClick> *getOnMouseClickHandlers();
 };

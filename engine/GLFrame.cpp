@@ -44,7 +44,7 @@ GLFrame::GLFrame(std::string background)
 	glBindVertexArray(1);
 }
 
-void GLFrame::addChild(GLObject *child)
+void GLFrame::addChild(IGLObject *child)
 {
 	children.push_back(child);
 }
@@ -57,7 +57,7 @@ void GLFrame::draw()
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	//glBindVertexArray(0);
 	//glBindVertexArray(1);
-	for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end(); iterator != end; ++iterator) 
+	for (std::list<IGLObject*>::const_iterator iterator = children.begin(), end = children.end(); iterator != end; ++iterator)
 		(*iterator)->draw();
 }
 
@@ -76,7 +76,7 @@ GLFrame::~GLFrame()
 
 std::list<Coordinates *> * GLFrame::getCoordinates() {
 	std::list<Coordinates* > *result = new std::list<Coordinates* >();
-    for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end();
+    for (std::list<IGLObject*>::const_iterator iterator = children.begin(), end = children.end();
          iterator != end; ++iterator) {
         result->push_back((*iterator)->getCoordinates());
     }
@@ -85,13 +85,13 @@ std::list<Coordinates *> * GLFrame::getCoordinates() {
 
 std::list<mouseClick> * GLFrame::getOnMouseClickHandlers() {
     std::list<mouseClick> *result = new std::list<mouseClick>();
-    for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end();
+    for (std::list<IGLObject*>::const_iterator iterator = children.begin(), end = children.end();
          iterator != end; ++iterator) {
         result->push_back((*iterator)->getOnMouseClick());
     }
     return result;
 }
 
-std::list<GLObject *> GLFrame::getChildren() {
+std::list<IGLObject *> GLFrame::getChildren() {
     return children;
 }
