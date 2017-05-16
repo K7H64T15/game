@@ -10,6 +10,9 @@
 
 using namespace std;
 
+void onPanelMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos);
+void onPanelMouseMove(GLObject *object, double xpos, double ypos);
+
 class GLPanel : public GLObject {
     GLuint standardTexture;
     list<GLObject*> children;
@@ -20,6 +23,7 @@ public:
     virtual void active();
     virtual void deactivate();
     virtual void press();
+    void draw();
     std::list<GLObject*> getChildren();
     ~GLPanel();
 };

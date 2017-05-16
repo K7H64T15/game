@@ -36,3 +36,19 @@ std::list<GLObject *> GLPanel::getChildren() {
 GLPanel::~GLPanel() {
 
 }
+
+void GLPanel::draw() {
+    GLObject::draw();
+    for (std::list<GLObject*>::const_iterator iterator = children.begin(), end = children.end(); iterator != end; ++iterator)
+        (*iterator)->draw();
+}
+
+void onPanelMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos)
+{
+
+}
+
+void onPanelMouseMove(GLObject *object, double xpos, double ypos)
+{
+
+}

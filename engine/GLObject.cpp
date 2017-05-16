@@ -60,7 +60,7 @@ void GLObject::draw()
 
 bool GLObject::isMouseOnObject(double xpos, double ypos)
 {
-	return (xpos >= x && xpos <= (x + height) && ypos >= y && ypos <= (y + width));
+	return (x <= xpos && (x + width) >= xpos && y  <= ypos && (y + height) >= ypos);
 }
 
 void GLObject::active()

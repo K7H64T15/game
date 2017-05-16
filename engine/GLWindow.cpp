@@ -85,8 +85,7 @@ static void onMouseMove(GLFWwindow * window, double xpos, double ypos)
     std::list<GLObject *> objects = (*GLWindow::frames)[GLWindow::current]->getChildren();
     for (std::list<GLObject *>::const_iterator iterator = objects.begin(),
                  end = objects.end(); iterator != end; ++iterator) {
-        if ((*iterator)->getCoordinates()->leftX <= xpos && (*iterator)->getCoordinates()->rightX >= xpos &&
-            (*iterator)->getCoordinates()->bottomY <= ypos && (*iterator)->getCoordinates()->topY >= ypos) {
+        if ((*iterator)->isMouseOnObject(xpos, ypos)) {
             ((*iterator)->getOmMouseMove())((*iterator), xpos - (*iterator)->getCoordinates()->leftX,
                                              ypos - (*iterator)->getCoordinates()->bottomY);
         }
@@ -104,8 +103,7 @@ void onMouseClick(GLFWwindow* window, int button, int action, int mods)
     std::list<GLObject *> objects = (*GLWindow::frames)[GLWindow::current]->getChildren();
     for (std::list<GLObject *>::const_iterator iterator = objects.begin(),
                  end = objects.end(); iterator != end; ++iterator) {
-        if ((*iterator)->getCoordinates()->leftX <= xpos && (*iterator)->getCoordinates()->rightX >= xpos &&
-                (*iterator)->getCoordinates()->bottomY <= ypos && (*iterator)->getCoordinates()->topY >= ypos) {
+        if ((*iterator)->isMouseOnObject(xpos, ypos)) {
             ((*iterator)->getOnMouseClick())((*iterator), button, action, mods,
                                              xpos - (*iterator)->getCoordinates()->leftX,
                                              ypos - (*iterator)->getCoordinates()->bottomY);
