@@ -3,8 +3,7 @@
 #include "GameWindow.h"
 #include "Constants.h"
 #include "GLField.h"
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include "GLButton.h"
 
 GameWindow *GameWindow::instance = nullptr;
 
@@ -20,16 +19,17 @@ void onExitMouseMove(IGLObject* object, double xpos, double ypos);
 
 GameWindow::GameWindow()
 {
-	GLObject *start = new GLButton("newGameS.bmp", "newGameA.bmp", "newGameP.bmp", 840, 200, 100, 300);
-	GLObject *resume = new GLButton("continueS.bmp", "continueA.bmp", "continueP.bmp", 840, 400, 100, 300);
-	GLObject *settings = new GLButton("settingsS.bmp", "settingsA.bmp", "settingsP.bmp", 840, 600, 100, 300);
-	GLObject *exit = new GLButton("exitS.bmp", "exitA.bmp", "exitP.bmp", 840, 800, 100, 300);
+	IGLObject *start = new GLButton("newGameS.bmp", "newGameA.bmp", "newGameP.bmp", 840, 200, 100, 300);
+    IGLObject *resume = new GLButton("continueS.bmp", "continueA.bmp", "continueP.bmp", 840, 400, 100, 300);
+    IGLObject *settings = new GLButton("settingsS.bmp", "settingsA.bmp", "settingsP.bmp", 840, 600, 100, 300);
+    IGLObject *exit = new GLButton("exitS.bmp", "exitA.bmp", "exitP.bmp", 840, 800, 100, 300);
 	exit->setOnMouseClick(&onExitMouseClick);
 	start->setOnMouseClick(&onStartMouseClick);
 	GLWindow::frame->addChild(start);
 	GLWindow::frame->addChild(resume);
 	GLWindow::frame->addChild(settings);
 	GLWindow::frame->addChild(exit);
+	loadCoordinates();
 }
 
 GameWindow::~GameWindow()
@@ -75,7 +75,6 @@ void onStartMouseClick(IGLObject *object, int button, int action, int mods, doub
             (*GameWindow::getInstance()->frames)[Constants::GAME_FRAME]->addChild(texture);
         }
     }
-    //auto text = new Tex
 }
 
 void onResumeMouseClick(IGLObject *object, int button, int action, int mods, double, double)

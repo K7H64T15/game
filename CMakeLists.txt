@@ -91,7 +91,17 @@ add_executable(game
         common/texture.cpp
         common/texture.hpp
         code/Skills.cpp
-        code/BattlePhaseControl.cpp engine/ResourceFactory.cpp engine/ResourceFactory.h engine/GLPanel.cpp engine/GLPanel.h engine/GLText.cpp engine/GLText.h engine/Shader.cpp engine/Shader.h engine/IGLObject.h)
+        code/BattlePhaseControl.cpp
+        engine/ResourceFactory.cpp
+        engine/ResourceFactory.h
+        engine/GLPanel.cpp
+        engine/GLPanel.h
+        engine/GLText.cpp
+        engine/GLText.h
+        engine/Shader.cpp
+        engine/Shader.h
+        engine/IGLObject.h
+        )
 
 target_link_libraries(game
         ${ALL_LIBS})

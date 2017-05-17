@@ -8,7 +8,6 @@ std::map<const std::string, GLFrame*> *GLWindow::frames = new std::map<const std
 bool GLWindow::shouldClose = false;
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos);
 void onMouseClick(GLFWwindow* window, int button, int action, int mods);
-static void onKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 GLWindow::GLWindow()
 {
@@ -52,13 +51,6 @@ GLWindow::GLWindow()
 	}
 
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-
-    glViewport(0, 0, screenWidth, screenHeight);
-
-    // Set OpenGL options
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glfwSetCursorPosCallback(window, onMouseMove);
     glfwSetMouseButtonCallback(window, onMouseClick);
@@ -119,20 +111,31 @@ void onMouseClick(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-void onKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-
-}
-
 GLWindow::~GLWindow()
 {
 	glfwTerminate();
 	//delete frame;
 }
 
+void GLWindow::loadCoordinates() {
+	//TODO:: cleanup
+//    mouseHandlers->clear();
+//    std::list<Coordinates *> *coordinates = frame->getCoordinates();
+//    std::list<mouseClick> *onMouseClick = frame->getOnMouseClickHandlers();
+//    std::list<mouseClick>::const_iterator iterator2 = onMouseClick->begin(), end2 = onMouseClick->end();
+//    for (std::list<Coordinates *>::const_iterator iterator = coordinates->begin(), end = coordinates->end();
+//         iterator != end, iterator2 != end2; ++iterator, ++iterator2) {
+//        MouseHandler *handler = new MouseHandler();
+//        handler->coordinates = (*iterator);
+//        handler->onMouseClick = (*iterator2);
+//        mouseHandlers->push_back(*handler);
+//    }
+}
+
 void GLWindow::setFrame(const std::string frame) {
 	this->frame = (*frames)[frame];
     current = frame;
+	loadCoordinates();
 }
 
 void GLWindow::closeWindow() {
