@@ -1,6 +1,8 @@
 #include "GLFrame.h"
 #include "ResourceFactory.h"
 
+void onStandartKeyPress(GLFrame* frame, int key, int scancode, int action, int mods);
+
 void GLFrame::InitObject(const GLfloat points[], const int size, GLuint vbo, int arrayNum) {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, size, points, GL_STATIC_DRAW);
@@ -42,6 +44,7 @@ GLFrame::GLFrame(std::string background)
 	glBindVertexArray(vao);
 	InitObject(uvcoordinates, 8 * sizeof(GLfloat), vboT, 1);
 	glBindVertexArray(1);
+	onKeyPress = &onStandartKeyPress;
 }
 
 void GLFrame::addChild(IGLObject *child)
@@ -94,4 +97,17 @@ std::list<mouseClick> * GLFrame::getOnMouseClickHandlers() {
 
 std::list<IGLObject *> GLFrame::getChildren() {
     return children;
+}
+
+void GLFrame::setOnKeyPress(KeyPress onKeyPress) {
+	this->onKeyPress = onKeyPress;
+}
+
+KeyPress GLFrame::getOnKeyPress() {
+	return onKeyPress;
+}
+
+void onStandartKeyPress(GLFrame* frame, int key, int scancode, int action, int mods)
+{
+
 }

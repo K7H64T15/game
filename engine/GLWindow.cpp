@@ -8,6 +8,7 @@ std::map<const std::string, GLFrame*> *GLWindow::frames = new std::map<const std
 bool GLWindow::shouldClose = false;
 static void onMouseMove(GLFWwindow * window, double xpos, double ypos);
 void onMouseClick(GLFWwindow* window, int button, int action, int mods);
+void onKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 GLWindow::GLWindow()
 {
@@ -54,6 +55,7 @@ GLWindow::GLWindow()
 
 	glfwSetCursorPosCallback(window, onMouseMove);
     glfwSetMouseButtonCallback(window, onMouseClick);
+    glfwSetKeyCallback(window, onKeyPress);
 
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -75,7 +77,7 @@ void GLWindow::loop()
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
-	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+	while (/*glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&*/
 		glfwWindowShouldClose(window) == 0 && !shouldClose);
 }
 
@@ -108,6 +110,14 @@ void onMouseClick(GLFWwindow* window, int button, int action, int mods)
                                              xpos - (*iterator)->getCoordinates()->leftX,
                                              ypos - (*iterator)->getCoordinates()->bottomY);
         }
+    }
+}
+
+void onKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    for (std::map<const std::string, GLFrame*>::const_iterator iterator = GLWindow::frames->begin(), end = GLWindow::frames->end();
+         iterator != end; ++iterator) {
+        (*(*iterator).second->getOnKeyPress())((*iterator).second, key, scancode, action, mods);
     }
 }
 

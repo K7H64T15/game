@@ -17,6 +17,11 @@ void onResumeMouseMove(IGLObject* object, double xpos, double ypos);
 void onSettingsMouseMove(IGLObject* object, double xpos, double ypos);
 void onExitMouseMove(IGLObject* object, double xpos, double ypos);
 
+void onMenuKeyPress(GLFrame* frame, int key, int scancode, int action, int mods);
+void onGameKeyPress(GLFrame* frame, int key, int scancode, int action, int mods);
+void onSettingsKeyPress(GLFrame* frame, int key, int scancode, int action, int mods);
+
+
 GameWindow::GameWindow()
 {
 	IGLObject *start = new GLButton("newGameS.bmp", "newGameA.bmp", "newGameP.bmp", 840, 200, 100, 300);
@@ -29,6 +34,7 @@ GameWindow::GameWindow()
 	GLWindow::frame->addChild(resume);
 	GLWindow::frame->addChild(settings);
 	GLWindow::frame->addChild(exit);
+    GLWindow::frame->setOnKeyPress(&onMenuKeyPress);
 	loadCoordinates();
 }
 
@@ -117,5 +123,23 @@ void onSettingsMouseMove(IGLObject* object, double xpos, double ypos)
 
 void onExitMouseMove(IGLObject* object, double xpos, double ypos)
 {
+
+}
+
+void onMenuKeyPress(GLFrame *frame, int key, int scancode, int action, int mods) {
+    if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+    {
+        GLWindow::closeWindow();
+    }
+}
+
+void onGameKeyPress(GLFrame *frame, int key, int scancode, int action, int mods) {
+    if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+    {
+        GLWindow::setFrame(GLWindow::frames[])
+    }
+}
+
+void onSettingsKeyPress(GLFrame *frame, int key, int scancode, int action, int mods) {
 
 }
