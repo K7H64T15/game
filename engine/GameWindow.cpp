@@ -67,8 +67,8 @@ void onStartMouseClick(IGLObject *object, int button, int action, int mods, doub
     {
         for (auto j = 0; j < 60; j++)
         {
-            int height = .9 * 1280 / 30;
-            int width =  .8 * 1920 / 60;
+            int height = (int) (.9 * 1280 / 30);
+            int width = (int) (.8 * 1920 / 60);
             GLObject *texture;
             if (!fields[i][j].getEnabled())
             {
