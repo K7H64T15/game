@@ -4,6 +4,7 @@ project (game)
 find_package(OpenGL REQUIRED)
 
 add_subdirectory (external)
+add_subdirectory(tests)
 
 include_directories(
         external/glfw-3.1.2/include/GLFW/

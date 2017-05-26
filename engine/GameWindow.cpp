@@ -136,7 +136,7 @@ void onMenuKeyPress(GLFrame *frame, int key, int scancode, int action, int mods)
 void onGameKeyPress(GLFrame *frame, int key, int scancode, int action, int mods) {
     if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
     {
-        GLWindow::setFrame(GLWindow::frames[])
+
     }
 }
 
