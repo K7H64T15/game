@@ -35,5 +35,10 @@ public:
     void setOnMouseMove(mouseMove onMouseMove);
     mouseMove getOmMouseMove() { return onMouseMove; }
 	Coordinates * getCoordinates();
+	GLuint getTexture() const;
+
+    GLuint getShaders() const;
+
+    virtual std::string getName();
 	virtual ~GLObject();
 };

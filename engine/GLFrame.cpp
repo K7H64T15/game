@@ -107,6 +107,10 @@ KeyPress GLFrame::getOnKeyPress() {
 	return onKeyPress;
 }
 
+void GLFrame::clearChidren() {
+	children.clear();
+}
+
 void onStandartKeyPress(GLFrame* frame, int key, int scancode, int action, int mods)
 {
 

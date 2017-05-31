@@ -33,13 +33,14 @@
 //
 // This file implements cardinalities.
 
+#include "gmock/gmock-cardinalities.h"
+
 #include <limits.h>
 #include <ostream>  // NOLINT
 #include <sstream>
 #include <string>
-#include <tests/googlemock/include/gmock/gmock-cardinalities.h>
-#include <tests/googlemock/include/gmock/internal/gmock-internal-utils.h>
-#include <tests/googletest/include/gtest/internal/gtest-port.h>
+#include "gmock/internal/gmock-internal-utils.h"
+#include "gtest/gtest.h"
 
 namespace testing {
 
@@ -91,7 +92,7 @@ class BetweenCardinalityImpl : public CardinalityInterface {
 };
 
 // Formats "n times" in a human-friendly way.
-inline internal::string FormatTimes(int n) {
+inline std::string FormatTimes(int n) {
   if (n == 1) {
     return "once";
   } else if (n == 2) {

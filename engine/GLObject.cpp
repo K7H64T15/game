@@ -81,6 +81,18 @@ void GLObject::setOnMouseMove(mouseMove onMouseMove) {
     this->onMouseMove = onMouseMove;
 }
 
+GLuint GLObject::getTexture() const {
+	return texture;
+}
+
+std::string GLObject::getName() {
+    return "GLObject";
+}
+
+GLuint GLObject::getShaders() const {
+	return shaders;
+}
+
 void onStandardMouseClick(IGLObject *object, int button, int action, int mods, double xpos, double ypos)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)

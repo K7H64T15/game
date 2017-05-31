@@ -37,7 +37,7 @@
 #ifndef GTEST_INCLUDE_GTEST_INTERNAL_GTEST_INTERNAL_H_
 #define GTEST_INCLUDE_GTEST_INTERNAL_GTEST_INTERNAL_H_
 
-#include "gtest/internal/gtest-port.h"
+#include "gtest-port.h"
 
 #if GTEST_OS_LINUX
 # include <stdlib.h>
@@ -60,10 +60,10 @@
 #include <string>
 #include <vector>
 
-#include "gtest/gtest-message.h"
-#include "gtest/internal/gtest-string.h"
-#include "gtest/internal/gtest-filepath.h"
-#include "gtest/internal/gtest-type-util.h"
+#include "../gtest-message.h"
+#include "gtest-string.h"
+#include "gtest-filepath.h"
+#include "gtest-type-util.h"
 
 // Due to C++ preprocessor weirdness, we need double indirection to
 // concatenate two tokens when one of them is __LINE__.  Writing
@@ -502,9 +502,10 @@ typedef void (*SetUpTestCaseFunc)();
 typedef void (*TearDownTestCaseFunc)();
 
 struct CodeLocation {
-  CodeLocation(const string& a_file, int a_line) : file(a_file), line(a_line) {}
+  CodeLocation(const std::string& a_file, int a_line)
+      : file(a_file), line(a_line) {}
 
-  string file;
+  std::string file;
   int line;
 };
 

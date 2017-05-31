@@ -1,6 +1,7 @@
 #pragma once
 #include "GLButton.h"
 #include <list>
+#include <map>
 
 class GLFrame;
 
@@ -23,6 +24,7 @@ public:
     KeyPress getOnKeyPress();
 	std::list<Coordinates *> * getCoordinates();
     std::list<IGLObject*> getChildren();
+	void clearChidren();
     ~GLFrame();
 	std::list<mouseClick> *getOnMouseClickHandlers();
 };

@@ -5,6 +5,8 @@
 #ifndef GAME_IGLOBJECT_H
 #define GAME_IGLOBJECT_H
 
+#include <string>
+
 struct Coordinates {
     int leftX;
     int rightX;
@@ -31,6 +33,7 @@ public:
     virtual void active() = 0;
     virtual void press() = 0;
     virtual void deactivate() = 0;
+    virtual std::string getName() = 0;
 };
 
 

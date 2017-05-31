@@ -6,9 +6,7 @@
 std::string GLWindow::current = Constants::MENU_FRAME;
 std::map<const std::string, GLFrame*> *GLWindow::frames = new std::map<const std::string, GLFrame*>();
 bool GLWindow::shouldClose = false;
-static void onMouseMove(GLFWwindow * window, double xpos, double ypos);
-void onMouseClick(GLFWwindow* window, int button, int action, int mods);
-void onKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 
 GLWindow::GLWindow()
 {
@@ -150,6 +148,27 @@ void GLWindow::setFrame(const std::string frame) {
 
 void GLWindow::closeWindow() {
     shouldClose = true;
+}
+
+void GLWindow::emulateMouseMove(double xpos, double ypos) {
+	onMouseMove(window, xpos, ypos);
+}
+
+void GLWindow::emulateMouseClick(int button, int action, int mods, double xpos, double ypos) {
+	glfwSetCursorPos(window, xpos, ypos);
+	onMouseClick(window, button, action, mods);
+}
+
+void GLWindow::addChild(GLObject *object) {
+    GLWindow::frame->addChild(object);
+}
+
+void GLWindow::clearChilds() {
+
+}
+
+std::list<IGLObject *> GLWindow::getChildren() {
+    return GLWindow::frame->getChildren();
 }
 
 

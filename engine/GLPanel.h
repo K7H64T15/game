@@ -25,6 +25,7 @@ public:
     virtual void press();
     void draw();
     std::list<GLObject*> getChildren();
+    std::string getName();
     ~GLPanel();
 };
 

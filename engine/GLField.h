@@ -15,6 +15,7 @@ public:
     virtual void active();
     virtual void deactivate();
     virtual void press();
+    std::string getName();
     ~GLField();
 };
 

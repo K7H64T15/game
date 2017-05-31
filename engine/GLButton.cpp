@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GLButton.h"
 #include "Utility.h"
 #include "ResourceFactory.h"
@@ -6,6 +7,7 @@ GLButton::GLButton(std::string standardTexture, int x, int y, int heigth, int wi
         GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
                  Utility::getXCoordinate(width))
 {
+    name = std::string(standardTexture + std::to_string(x) + std::to_string(y));
     loadTextures(standardTexture, standardTexture, standardTexture);
     texture = this->standardTexture;
 }
@@ -15,6 +17,7 @@ GLButton::GLButton(std::string standardTexture, std::string activeTexture, int x
 		: GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
                    Utility::getXCoordinate(width))
 {
+    name = std::string(standardTexture + std::to_string(x) + std::to_string(y));
 	loadTextures(standardTexture, activeTexture, activeTexture);
 	texture = this->standardTexture;
 }
@@ -24,6 +27,7 @@ GLButton::GLButton(std::string standardTexture, std::string activeTexture, std::
         GLObject(Utility::getXCoordinate(x), Utility::getYCoordinate(y), Utility::getYCoordinate(heigth),
                  Utility::getXCoordinate(width))
 {
+    name = std::string(standardTexture + std::to_string(x) + std::to_string(y));
     loadTextures(standardTexture, activeTexture, clickTexture);
     texture = this->standardTexture;
 }
@@ -58,4 +62,8 @@ GLButton::~GLButton()
 {
 	glDeleteProgram(shaders);
 	glDeleteTextures(1, &texture);
+}
+
+std::string GLButton::getName() {
+    return name;
 }

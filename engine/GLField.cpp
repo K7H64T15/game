@@ -34,4 +34,8 @@ GLField::~GLField() {
     glDeleteTextures(1, &texture);
 }
 
+std::string GLField::getName() {
+    return GLObject::getName();
+}
+
 

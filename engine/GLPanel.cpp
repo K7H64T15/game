@@ -43,6 +43,10 @@ void GLPanel::draw() {
         (*iterator)->draw();
 }
 
+std::string GLPanel::getName() {
+    return GLObject::getName();
+}
+
 void onPanelMouseClick(GLObject *object, int button, int action, int mods, double xpos, double ypos)
 {
 

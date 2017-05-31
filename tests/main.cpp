@@ -1,8 +1,9 @@
 #include <iostream>
-#include <globalPhaseControl.h>
-#include <gtest/gtest.h>
-#include <creature.h>
+#include <code/globalPhaseControl.h>
+#include <code/creature.h>
 #include <string>
+#include "googletest/include/gtest/gtest.h"
+
 using namespace std;
 
 TEST (phaseControl, checkFlags){
@@ -11,14 +12,14 @@ TEST (phaseControl, checkFlags){
 }
 TEST (phaseControl, checkStatus){
     globalPhaseControl test;
-    player p;
+    Player p;
     p.setHealthPointsCurrent(-1); //player is dead
     test.checkStatus(p);
     ASSERT_EQ(test.checkFlags(),1); //game over
 }
 
 TEST (creatureTest, setPoints){
-    creature test;
+    Creature test;
     test.setHealthPointsCurrent(100);
     ASSERT_EQ(test.getHealthPointsCurrent(),100);
     test.setHealthPointsMax(150);
@@ -29,18 +30,18 @@ TEST (creatureTest, setPoints){
 }
 
 TEST (fieldTest, setVisible){
-    field test;
+    Field test;
     test.setVisible();
     ASSERT_EQ(test.getVisible(),true);
 }
 TEST (fieldTest, setRoom){
-    field test;
+    Field test;
     test.setRoom();
     ASSERT_EQ(test.getEnabled(),true);
     ASSERT_EQ(test.getType(),ROOM);
 }
 TEST (fieldTest, setTunnel){
-    field test;
+    Field test;
     test.setTunnel(HORIZONTAL);
     ASSERT_EQ(test.getEnabled(),true);
     ASSERT_EQ(test.getType(),TUNNEL);

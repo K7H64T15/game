@@ -4,6 +4,7 @@
 class GLButton :
 	public GLObject
 {
+    std::string name;
 	GLuint standardTexture, activeTexture, onClickTexture;
 public:
     GLButton(std::string standardTexture, int x = 0, int y = 0, int heigth = 0, int width = 0);
@@ -15,6 +16,7 @@ public:
 	virtual void active();
 	virtual void deactivate();
     virtual void press();
+	virtual std::string getName();
 	~GLButton();
 };
 
